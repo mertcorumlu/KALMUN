@@ -8,8 +8,12 @@
 
 
 try{
+
+    //SELECT ALL COUNTRIES TO ADD SELECT OPTIONS
     $country_array = array();
-    $countries = $PDO->query("SELECT * FROM `countries` ");
+    $countries = $PDO->query("SELECT `id`,`country_name` FROM `countries` ");
+
+    //PUSH COUNTRY IDS AND COUNTRY NAME IN AN ARRAY
     while($country_data = $countries->fetch(PDO::FETCH_ASSOC)){
         array_push($country_array,$country_data);
     }
@@ -51,9 +55,12 @@ try{
                                 <select class="form-control" name="advisor_id" required>
                                     <option value="">Please Select...</option>
                                     <?php
+                                    //SELECT ALL ADVISROS FROM phpauth_users TABLE
+                                    //DISPLAY THEM IN SELECT OPTIONS
                                     $query = $PDO->query(
                                         "SELECT `id`,CONCAT(`name`,' ',`surname`) as name FROM `phpauth_users` WHERE `auth` = '3' ");
 
+                                    //DISPLAY ADVISORS IN LOOP
                                     while($data = $query->fetch(PDO::FETCH_ASSOC))
                                     {
                                         ?>
@@ -78,6 +85,7 @@ try{
                                     <select class="form-control school_country" name="school_country_id" required>
                                         <option value="">Please Select...</option>
                                         <?php
+                                        //DISPLAY COUNTRIES IN SELECT OPTION
                                         for($i = 0; $i < count($country_array) ; $i++ ){
 
                                             ?>
@@ -100,10 +108,11 @@ try{
 
                         <?php
 
-
+                                    //SELECT COMMITEES
                                     $query = $PDO->query(
                                         "SELECT * FROM `committees`");
 
+                                    //DISPLAY ALL COMMITTEES
                                     while($data = $query->fetch(PDO::FETCH_ASSOC))
                                     {
                                         ?>
@@ -118,6 +127,7 @@ try{
                                 <select type="text" class="form-control committee_country" name="quotas[<?=$data["id"]?>][country]" >
                                     <option value="">Please Select...</option>
                                     <?php
+                                    //DISPLAY ALL COUNTRIES
                                     for($i = 0; $i < count($country_array) ; $i++ ){
 
                                     ?>

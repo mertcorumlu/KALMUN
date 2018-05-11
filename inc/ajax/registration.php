@@ -6,39 +6,60 @@
  * Time: 01:55
  */
 
-if($_POST){
-    include("../loader.php");
+//LOAD APP
+include("../loader.php");
+
+
+if(!$_POST){
+    http_response_code(404);
+}
+
 
     //TYPE 1 = School Registration
     //TYPE 2 = Individual Registration
     //TYPE 3 = ICJ Registration
     //TYPE 4 = Press Application
 
-    $error = array(
+    //SET RETURN ARRAY
+    $return = array(
         "return" => true,
         "message"=> ""
     );
 
+    //YOU MUST CHECK APPLICATION TYPE AND TAKE PARAMETERS AS IT
     if(post("application_type") == "1"){
 
-        print_r(post("data"));
-        exit;
-
         try{
+            //SET EMAIL INTO A VARIABLE
             $email = post("school_reg_contact_mail");
 
-            $query = $PDO->query("SELECT * FROM `applications`,`phpauth_users` WHERE applications.email = '{$email}' OR phpauth_users.email = '{$email}' ");
+            //START MYSQL TRANSACTION
+            $PDO->query("START TRANSACTION;");
 
+            //CHECK IF USER ALREADY APPLIED WITH THIS EMAIL
+            $query = $PDO->query("SELECT 
+                                           * 
+                                           FROM 
+                                           `applications`,`phpauth_users` 
+                                           WHERE 
+                                           applications.email = '{$email}' 
+                                           OR 
+                                           phpauth_users.email = '{$email}' 
+                                           ");
+
+            //IF THERE IS AN APPLICATION WITH THIS EMAIL,DONT LET HIM APPLY AGAIN
             if($query->rowCount() >= 1){
-                $error["message"] = "You have already applied with this email.";
-                return_error($error);
+                $return["error"] = true;
+                $return["message"] = "You have already applied with this email.";
+                $PDO->query("ROLLBACK;");
+                return_error($return);
             }
 
+            //WE DONT NEED $QUERY ANYMORE,JUST SET IT NULL
             $query = null;
 
-           // print_r($_POST);exit;
 
-
+            //INSERT APPLICATION
             $prepare = $PDO->prepare("INSERT INTO `applications` SET 
                                               `type` = :type , 
                                               `name` = :name, 
@@ -50,6 +71,7 @@ if($_POST){
                                               `data` = :data, 
                                               `status` = 0");
 
+            //EXECUTE
             $prepare->execute(array(
                 "type" => post("application_type"),
                 "name" => post("data")["school_reg_advisor_name"],
@@ -62,22 +84,31 @@ if($_POST){
 
             ));
 
-            $error["return"] = false;
-            $error["message"] = "You Have Succesfully Applied.Your Submission Will Be Evaluated Within a Week.";
-            return_error($error);
+            //DISPLAY MESSAGE TO INFORM USER ABOUT SUCCESSION
+            $return["return"] = false;
+            $return["message"] = "You Have Succesfully Applied.Your Submission Will Be Evaluated Within a Week.";
+            return_error($return);
 
 
         }catch (PDOException $e){
-                $error["message"] = $e->errorInfo[2];
-                return_error($error);
+            //HANDLE SQL ERRORS
+            $return["error"] = true;
+            $return["message"] = $e->errorInfo[2];
+            $PDO->query("ROLLBACK;");
+            return_error($return);
         }
 
     }
     else if (post("application_type") == "2"){
-       // print_r($_POST);exit;
+
         try{
+            //SET EMAIL
             $email = post("ind_reg_contact_mail");
 
+            //START SQL TRANSACTION
+            $PDO->query("START TRANSACTION;");
+
+            //CHECK IF USER APPLIED WITH THIS EMAIL BEFORE
             $query = $PDO->query("SELECT * 
                                            FROM 
                                            `applications`,`phpauth_users`
@@ -86,16 +117,18 @@ if($_POST){
                                            OR 
                                            phpauth_users.email = '{$email}' ");
 
+            //IF EMAIL IS EXIST,DONT LET HIM APPLY
             if($query->rowCount() >= 1){
-                $error["message"] = "You have already applied with this email.";
-                return_error($error);
+                $return["error"] = true;
+                $return["message"] = "You have already applied with this email.";
+                $PDO->query("ROLLBACK;");
+                return_error($return);
             }
 
+            //YOU DONT NEED $QUERY ANYMORE ,SET IT NULL
             $query = null;
 
-
-
-
+            //INSERT APPLICATION
             $prepare = $PDO->prepare("INSERT INTO `applications` SET 
                                               `type` = :type , 
                                               `name` = :name, 
@@ -107,6 +140,7 @@ if($_POST){
                                               `data` = :data, 
                                               `status` = 0");
 
+            //EXECUTE INSERTION
             $prepare->execute(array(
                 "type" => post("application_type"),
                 "name" => post("ind_reg_name"),
@@ -121,18 +155,20 @@ if($_POST){
 
 
 
-            $error["return"] = false;
-            $error["message"] = "You Have Succesfully Applied.Your Submission Will Be Evaluated Within a Week.";
-            return_error($error);
+            //RETURN IF NO ERROR
+            $return["return"] = false;
+            $return["message"] = "You Have Succesfully Applied.Your Submission Will Be Evaluated Within a Week.";
+            return_error($return);
 
 
         }catch (PDOException $e){
-            $error["message"] = $e->errorInfo[2];
-            return_error($error);
+            $return["error"] = true;
+            $return["message"] = $e->errorInfo[2];
+            $PDO->query("ROLLBACK;");
+            return_error($return);
         }
 
     }
 
 
 
-}

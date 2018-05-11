@@ -6,7 +6,7 @@
  * Time: 16:34
  */
 
-
+//INCLUDE THE ACTION OF SCHOOLS
 switch (get("subpage")){
 
     case  "list":

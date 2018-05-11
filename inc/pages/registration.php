@@ -6,6 +6,7 @@
  * Time: 01:54
  */
 
+//IF LOGGED IN REDIRECT HOME PAGE
 if($auth->isLogged()){
     redirect("/");
 }
@@ -43,6 +44,7 @@ if($auth->isLogged()){
 
         <?php
 
+        //INCLUDE REGISTRATION TYPE
         switch (get("subpage")){
 
             case "school-registration" :

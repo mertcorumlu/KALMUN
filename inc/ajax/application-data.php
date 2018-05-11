@@ -6,21 +6,29 @@
  * Time: 23:41
  */
 
+//LOAD APP
 include("../loader.php");
 
+//IF REQUEST FALSE RETURN 404
 if(get("id")==""){
     http_response_code(404);
     exit;
 }
 
+//CHECK IF USER REALLY LOGGED IN AND AUTHORIZED FOR DISPLAYING APPLICATION DATA
 check_login($PDO,$auth,array(0,1));
 
 try{
     $id=get("id");
+
+    //GET REQUIRED APPLICATIONS DATA
     $fetch = $PDO->query("SELECT * FROM `applications` WHERE `id`='{$id}' LIMIT 1")->fetch(PDO::FETCH_ASSOC);
+
+    //DECODE JSON DATA
     $data = json_decode($fetch["data"],true);
     error_reporting(0);
 
+    //IF INDIVIDUAL APPLICATION
     if($fetch["type"]=="1"){
 
 
@@ -230,6 +238,7 @@ try{
         <?php
     }
     else
+    //IF SCHOOL APPLICATION
     if($fetch["type"]=="2"){
 
 

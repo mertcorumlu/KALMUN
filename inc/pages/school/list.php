@@ -40,6 +40,10 @@
                             <?php
                             try{
 
+                                /*
+                                 * SELECT ALL SCHOOLS
+                                 * JOIN THEM WITH ADVISOR NAME AND COUNTRY NAME
+                                 */
                                 $applications = $PDO->query("SELECT 
                                                                       schools.id as school_id,
                                                                       schools.school_name,
@@ -57,6 +61,10 @@
                                                                         ON 
                                                                         schools.country_id = countries.id
                                                                         ");
+
+                                /*
+                                 * DISPLAY ALL SCHOOLS
+                                 */
                                 while($data = $applications->fetch(PDO::FETCH_ASSOC)){
 
 
@@ -70,6 +78,10 @@
 
                                         <td>
                                             <?php
+                                            /*
+                                             * DISPLAY A SCHOOLS DELEGATE STRUCTURE
+                                             * JOINT WITH COUNTRY NAME AND COMMITTEE NAME
+                                             */
                                             $structure = $PDO->query("
                                             SELECT 
                                             `committees`.committee_name,
@@ -89,12 +101,17 @@
                                             `school_id` = '{$data["school_id"]}'  ");
 
 
+                                            /*
+                                             * DISPLAY DELEGATE STRUCTURE
+                                             */
                                             while ($structure_data = $structure->fetch(PDO::FETCH_ASSOC)){
-                                            ?>
 
-
-                                            <?php
-                                                echo "IN <strong>". $structure_data["committee_name"] . "</strong> From <strong>".$structure_data["country_name"]."</strong> <strong>".$structure_data["quota"]."</strong> Person <br>";
+                                            echo
+                                                "IN 
+                                                <strong>". $structure_data["committee_name"] . "</strong> 
+                                                From 
+                                                <strong>".$structure_data["country_name"]."</strong>
+                                                <strong>".$structure_data["quota"]."</strong> Person <br>";
                                             }
                                             ?>
                                         </td>

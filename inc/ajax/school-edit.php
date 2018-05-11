@@ -6,100 +6,30 @@
  * Time: 20:17
  */
 
+//LOAD APP
 include '../loader.php';
 
-//EDIT POSTED
-if($_POST){
-
-    if(empty(post("school_name")) || empty(post("advisor_id")) || empty($_POST["quotas"])){
-
-    http_response_code(404);
-    exit;
-
-}
-
-
-$return = array(
-    "error" => true,
-    "message" => ""
-);
-
-try{
-
-    $PDO->query("START TRANSACTION");
-
-    $school_id = post("school_id");
-
-    $PDO->prepare("UPDATE `schools` SET `school_name` = :school_name, `advisor_id` = :advisor_id,`country_id`=:country_id WHERE `id`=:id ")
-        ->execute(array(
-            "school_name" => trim(post("school_name")),
-            "advisor_id" => post("advisor_id"),
-            "country_id" => post("school_country_id"),
-            "id" => $school_id
-
-        ));
-
-
-
-    $PDO->query("DELETE FROM `committee_structure` WHERE `school_id`='{$school_id}' ");
-
-    foreach($_POST["quotas"] as $key => $value){
-
-
-        if($value["quota"] > 0){
-
-            $PDO->prepare("INSERT INTO `committee_structure` SET `committee_id` = :committee_id, `country_id` = :country_id , `school_id` = :school_id , `quota` = :quota")
-                ->execute(array(
-                    "committee_id" => $key,
-                    "country_id" => $value["country"],
-                    "school_id" => $school_id,
-                    "quota" => $value["quota"]
-                ));
-
-        }
-
-    }
-
-    $return = array(
-        "error" => false,
-        "message" => "School Succesfully Edited."
-    );
-    $PDO->query("COMMIT;");
-    return_error($return);
-
-
-
-}catch(PDOException $e){
-    $return = array(
-        "error" => true,
-        "message" => $e->errorInfo[2]
-    );
-    $PDO->query("ROLLBACK;");
-    return_error($return);
-
-}
-
-exit;
-
-}
-
-
+//CHECK PHP REQUEST
 if(empty(get("id"))){
     http_response_code(404);
     exit;
 }
 
-
+//CHECK IF USER LOGGED IN,OR IS AUTHORIZED
 check_login($PDO,$auth,array(0,1));
 
 
 try{
+    //ARRAY TO COUNT COUNTRIES
 $country_array = array();
+
+//SELECT ALL SCHOLS,PUSH INTO ARRAY
 $countries = $PDO->query("SELECT * FROM `countries` ");
 while($country_data = $countries->fetch(PDO::FETCH_ASSOC)){
     array_push($country_array,$country_data);
 }
 
+    //SELECT THE PROVIDED SCHOOL
     $school_data = $PDO->query("
                                                                       SELECT 
                                                                       schools.id,
@@ -160,6 +90,7 @@ while($country_data = $countries->fetch(PDO::FETCH_ASSOC)){
                                     <select class="form-control" name="advisor_id" required>
                                         <option value="">Please Select...</option>
                                         <?php
+                                        //SELECT ADVISORS,DISLAY THEM IN A SELECT OPTION
                                         $query = $PDO->query(
                                             "SELECT `id`,CONCAT(`name`,' ',`surname`) as name FROM `phpauth_users` WHERE `auth` = '3' ");
 
@@ -187,6 +118,7 @@ while($country_data = $countries->fetch(PDO::FETCH_ASSOC)){
                                     <select class="form-control school_country" name="school_country_id" required>
                                         <option value="">Please Select...</option>
                                         <?php
+                                        //DISPLAY ALLCOUNTRIES
                                         for($i = 0; $i < count($country_array) ; $i++ ){
 
                                             ?>
@@ -210,6 +142,7 @@ while($country_data = $countries->fetch(PDO::FETCH_ASSOC)){
                             <?php
 
 
+                            //SELECT ALL COMMITESS TO CREATE STRUCTURE
                             $query = $PDO->query(
                                 "SELECT 
                                             committees.committee_name,
@@ -225,7 +158,7 @@ while($country_data = $countries->fetch(PDO::FETCH_ASSOC)){
                                             AND 
                                             committee_structure.school_id = '{$_GET["id"]}' ");
 
-
+                            //DISPLAY STRUCTURE
                             while($data = $query->fetch(PDO::FETCH_ASSOC))
                             {
                                 ?>
@@ -240,6 +173,7 @@ while($country_data = $countries->fetch(PDO::FETCH_ASSOC)){
                                         <select type="text" class="form-control committee_country" name="quotas[<?=$data["id"]?>][country]"  >
                                             <option value="">Please Select...</option>
                                             <?php
+                                            //DISPLAY ALL COUNTRIES
                                             for($i = 0; $i < count($country_array) ; $i++ ){
 
                                                 ?>
@@ -284,7 +218,7 @@ while($country_data = $countries->fetch(PDO::FETCH_ASSOC)){
 
             $.ajax({
                 type: "POST",
-                url: "/inc/ajax/school-edit",
+                url: "/inc/ajax/school-edit-post",
                 data: $("#school_edit_form input,#school_edit_form select,#school_edit_form textarea").serializeArray(),
                 beforeSend:function () {
                     show_loading(button);

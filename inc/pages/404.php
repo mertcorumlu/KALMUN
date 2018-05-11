@@ -1,4 +1,5 @@
 <?php
+//404 RESPONSE
 http_response_code(404);
 ?>
 <!DOCTYPE html>

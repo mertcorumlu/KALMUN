@@ -42,6 +42,7 @@
 
                             try{
 
+                                //SELECT COUNT OF ALL APPLICATIONS
                                 $query = $PDO->query("SELECT 
                                                               COUNT(`id`) AS `counts`,`type`,`status` 
                                                               FROM 
@@ -50,19 +51,21 @@
                                                               `type`,`status` 
                                                               ORDER BY 
                                                               `type` 
-                                                              ASC");
-                                $countArray = array(
-                                        1 => array(0,0,0),
-                                        2 => array(0,0,0),
-                                        3 => array(0,0,0),
-                                        4 => array(0,0,0)
-                                );
+                                                              ASC
+                                                              ");
+
+                                /*
+                                 * COUNT ALL APPLICATIONS FOR EACH APPLICATION TYPE
+                                 * USE $countArray defined in config.php
+                                 */
                                 while($data = $query->fetch(PDO::FETCH_ASSOC)){
 
                                     $countArray[$data["type"]][$data["status"]] += (int) $data["counts"];
 
                                 }
 
+                                //PRINT ALL APPLICATION TYPES
+                                //USE $Application_Type variable from config.php
                                 for($i=1;$i <= 4 ;$i++){
                             ?>
 
@@ -120,7 +123,7 @@
 
                             <?php
                             try{
-
+                                //SELECT ALL APPLICATIONS
                                 $applications = $PDO->query("SELECT * FROM `applications` ORDER BY `date` DESC");
                                 while($data = $applications->fetch(PDO::FETCH_ASSOC)){
 

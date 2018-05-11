@@ -53,6 +53,8 @@ try{
 
     }
 
+    $PDO->query("UPDATE `phpauth_users` SET `isactive` = 1 WHERE `id` = '{$_POST["advisor_id"]}' ");
+
     $return = array(
         "error" => false,
         "message" => "School Succesfully Added."
