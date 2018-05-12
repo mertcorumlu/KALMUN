@@ -11,7 +11,7 @@ include("../loader.php");
 
 //SET RETURN ARRAY
 $return=array(
-    "return"=>true,
+    "error"=>true,
     "message"=>""
 );
 
@@ -23,7 +23,7 @@ if($auth->isLogged()){
 
 //CHECK REQUEST PARAMETERS
 if(post("user_email")=="" || post("user_password")=="" ){
-    $return["message"]="Email Or Password Cannot Be Empty.";
+    $return["message"]="Email Or Password Cannot Be Empty";
     return_error($return);
 }
 
@@ -31,7 +31,7 @@ if(post("user_email")=="" || post("user_password")=="" ){
 $return = $auth->login(post("user_email"),post("user_password"),post("remember_me"));
 
 //HANDLE LOGIN ERRORS
-if($return["return"]==true){
+if($return["error"]==true){
     return_error($return);
 }
 

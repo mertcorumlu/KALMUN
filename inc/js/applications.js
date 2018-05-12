@@ -27,7 +27,7 @@
                     return 0;
                 }
 
-                $(".popup-content").html("<div class=\"alert alert-success text-center\" >"+data.message+"<br><a href=\"javascript:close_popup($('div.popup'),true)\">You Can Close This Dialog From Here.</a></div>");
+                $(".popup-content").html("<div class=\"alert alert-success text-center\" >"+data.message+"<br><a href=\"javascript:close_popup($('div.popup'),false)\">You Can Close This Dialog From Here.</a></div>");
 
                 $("div[data-id='"+data.id+"']").removeClass("btn-warning");
                 $("div[data-id='"+data.id+"']").removeClass("btn-danger");

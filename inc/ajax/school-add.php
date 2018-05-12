@@ -15,6 +15,8 @@ if(empty(post("school_name")) || empty(post("advisor_id")) || empty($_POST["quot
     
 }
 
+//CHECK IF USER LOGGED IN,OR IS AUTHORIZED
+check_login($PDO,$auth,array(0,1));
 
 $return = array(
     "error" => true,
@@ -27,7 +29,7 @@ try{
 
     $PDO->prepare("INSERT INTO `schools` SET `school_name` = :school_name, `advisor_id` = :advisor_id,`country_id`=:country_id ")
         ->execute(array(
-            "school_name" => trim(post("school_name")),
+            "school_name" => ucfirst(trim(post("school_name"))),
             "advisor_id" => post("advisor_id"),
             "country_id" => post("school_country_id")
 
@@ -53,7 +55,7 @@ try{
 
     }
 
-    $PDO->query("UPDATE `phpauth_users` SET `isactive` = 1 WHERE `id` = '{$_POST["advisor_id"]}' ");
+    //    $PDO->query("UPDATE `phpauth_users` SET `isactive` = 1,`country_id` = '".post("school_country_id")."',`school_id` = {$school_id} WHERE `id` = '{$_POST["advisor_id"]}' ");
 
     $return = array(
         "error" => false,

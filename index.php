@@ -42,6 +42,14 @@ switch(get("page")){
         $auth_levels = array(0,1);
         break;
 
+    case "users":
+        $include_page = "users";
+        $head = "<style>input[type=text]{text-transform: capitalize}</style>
+                 <link rel='stylesheet' href='/inc/css/popup.css'>";
+        $footer = "<script src=\"/inc/js/popup.js\"></script>";
+        $auth_levels = array(0,1);
+        break;
+
     case "school":
         $include_page = "school";
         $head = "<style>input[type=text]{text-transform: capitalize}</style>
@@ -58,6 +66,15 @@ switch(get("page")){
             include("inc/pages/".$include_page.".php");
             exit;
             break;
+
+    case "forgotpassword":
+        $include_page = "forgotpassword";
+        if($auth->isLogged()){
+            redirect("/");
+        }
+        include("inc/pages/".$include_page.".php");
+        exit;
+        break;
 
     case "registration":
         $include_page = "registration";

@@ -15,6 +15,9 @@ include '../loader.php';
         exit;
     }
 
+//CHECK IF USER LOGGED IN,OR IS AUTHORIZED
+check_login($PDO,$auth,array(0,1));
+
 
     //SET RETURN ARRAY
     $return = array(
@@ -32,12 +35,19 @@ include '../loader.php';
         //UPDATE SCHOOL INFO
         $PDO->prepare("UPDATE `schools` SET `school_name` = :school_name, `advisor_id` = :advisor_id,`country_id`=:country_id WHERE `id`=:id ")
             ->execute(array(
-                "school_name" => trim(post("school_name")),
+                "school_name" => ucfirst(trim(post("school_name"))),
                 "advisor_id" => post("advisor_id"),
                 "country_id" => post("school_country_id"),
                 "id" => $school_id
 
             ));
+
+//        $PDO->prepare("UPDATE `phpauth_users` SET `country_id` = :country_id,`school_id`=:school_id WHERE `id`=:id ")
+//        ->execute(array(
+//            "country_id" => post("school_country_id"),
+//            "school_id" => $school_id,
+//            "id" => post("advisor_id")
+//        ));
 
 
         //DELETE ALL OTHER SCHOOL COMITTEE STRUCTURE

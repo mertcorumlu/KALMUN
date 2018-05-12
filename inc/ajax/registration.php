@@ -74,9 +74,9 @@ if(!$_POST){
             //EXECUTE
             $prepare->execute(array(
                 "type" => post("application_type"),
-                "name" => post("data")["school_reg_advisor_name"],
-                "last_name" => post("data")["school_reg_advisor_last_name"],
-                "school" => post("school_reg_name_of_school"),
+                "name" => ucfirst(post("data")["school_reg_advisor_name"]),
+                "last_name" => ucfirst(post("data")["school_reg_advisor_last_name"]),
+                "school" => ucfirst(post("school_reg_name_of_school")),
                 "country" => post("data")["school_reg_country"],
                 "email" => post("school_reg_contact_mail"),
                 "telephone" => post("school_reg_contact_phone"),
@@ -143,9 +143,9 @@ if(!$_POST){
             //EXECUTE INSERTION
             $prepare->execute(array(
                 "type" => post("application_type"),
-                "name" => post("ind_reg_name"),
-                "last_name" => post("ind_reg_last_name"),
-                "school" => post("ind_reg_name_of_school"),
+                "name" => ucfirst(post("ind_reg_name")),
+                "last_name" => ucfirst(post("ind_reg_last_name")),
+                "school" => ucfirst(post("ind_reg_name_of_school")),
                 "country" => $_POST["data"]["ind_reg_country"],
                 "email" => post("ind_reg_contact_mail"),
                 "telephone" => post("ind_reg_contact_phone"),

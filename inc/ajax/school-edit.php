@@ -118,7 +118,7 @@ while($country_data = $countries->fetch(PDO::FETCH_ASSOC)){
                                     <select class="form-control school_country" name="school_country_id" required>
                                         <option value="">Please Select...</option>
                                         <?php
-                                        //DISPLAY ALLCOUNTRIES
+                                        //DISPLAY ALL COUNTRIES
                                         for($i = 0; $i < count($country_array) ; $i++ ){
 
                                             ?>
@@ -173,7 +173,7 @@ while($country_data = $countries->fetch(PDO::FETCH_ASSOC)){
                                         <select type="text" class="form-control committee_country" name="quotas[<?=$data["id"]?>][country]"  >
                                             <option value="">Please Select...</option>
                                             <?php
-                                            //DISPLAY ALL COUNTRIES
+                                            //DISPLAY COUNTRIES
                                             for($i = 0; $i < count($country_array) ; $i++ ){
 
                                                 ?>
@@ -219,7 +219,7 @@ while($country_data = $countries->fetch(PDO::FETCH_ASSOC)){
             $.ajax({
                 type: "POST",
                 url: "/inc/ajax/school-edit-post",
-                data: $("#school_edit_form input,#school_edit_form select,#school_edit_form textarea").serializeArray(),
+                data: $("#school_edit_form").serializeArray(),
                 beforeSend:function () {
                     show_loading(button);
                 },

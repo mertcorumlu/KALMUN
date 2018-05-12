@@ -74,7 +74,7 @@
                                         <td><strong><?=$data["school_id"]?></strong></td>
                                         <td><?=$data["school_name"]?></td>
                                         <td><?=$data["advisor_name"]?></td>
-                                        <td><div style="vertical-align: middle" class="flag flag-<?=strtolower($data["flag"])?>"></div><?=$data["country_name"]?></td>
+                                        <td><div class=" <?=$data["flag"] != "" ? "flag flag-".strtolower($data["flag"]) :"" ?>" style="vertical-align: middle"></div><?=$data["country_name"]?></td>
 
                                         <td>
                                             <?php
@@ -107,7 +107,7 @@
                                             while ($structure_data = $structure->fetch(PDO::FETCH_ASSOC)){
 
                                             echo
-                                                "IN 
+                                                "In 
                                                 <strong>". $structure_data["committee_name"] . "</strong> 
                                                 From 
                                                 <strong>".$structure_data["country_name"]."</strong>
@@ -150,7 +150,7 @@
 
             $(document).ready( function () {
                 $('.DataTable').DataTable({
-                    "order":[[1,"desc"]]
+                    "order":[[0,"asc"]]
                 });
             } );
         </script>

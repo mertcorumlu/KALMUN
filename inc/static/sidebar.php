@@ -38,7 +38,7 @@
             <li class="nav-item mT-30 active">
                 <a class="sidebar-link" href="/">
                 <span class="icon-holder">
-                  <i class="c-blue-500 ti-home"></i>
+                  <i class="c-blue-500 fa fa-home"></i>
                 </span>
                     <span class="title">Home</span>
                 </a>
@@ -51,10 +51,33 @@
                 <li class="nav-item">
                     <a class="sidebar-link" href="/applications">
                 <span class="icon-holder">
-                  <i class="c-blue-500 ti-files"></i>
+                  <i class="c-blue-500 fa fa-file"></i>
                 </span>
                         <span class="title">Applications</span>
                     </a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle" href="javascript:void(0);">
+                <span class="icon-holder">
+                    <i class="c-blue-500 fa fa-user"></i>
+                  </span>
+                        <span class="title">Users</span>
+
+                        <span class="arrow">
+                    <i class="ti-angle-right"></i>
+                  </span>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="sidebar-link" href="/users/list">List Users</a>
+                            </li>
+                            <li>
+                                <a class="sidebar-link" href="/users/add">Add New User</a>
+                            </li>
+
+                        </ul>
+                    </a>
+
                 </li>
 
             <li class="nav-item dropdown">

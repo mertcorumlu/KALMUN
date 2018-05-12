@@ -12,6 +12,15 @@ $db_name = "kalmun";
 $db_user = "root";
 $db_password = "";
 
+//AUTH STATUES
+$Auth_Statues = array(
+    "0" => "Super Admin",
+    "1" => "Moderator",
+    "2" => "Chair",
+    "3" => "Advisor",
+    "4" => "Delegate"
+);
+
 //Application Status
 $Application_Status = array(
     0 => "Pending",
@@ -80,6 +89,15 @@ Unfurtunately we have rejected your submission.<br>
 "
     )
 );
+
+//ADD USER MAILS
+$addEditUserMail = "
+Dear Participant,<br><br>
+Your control panel account is :<br>
+E-mail : <strong>%s</strong><br>
+Password : <strong>%s</strong><br><br>
+<p>You can change your password from system anytime you want.</p>
+";
 
 
 

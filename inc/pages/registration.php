@@ -74,7 +74,7 @@ if($auth->isLogged()){
                 $.ajax({
                     type: "POST",
                     url: "/inc/ajax/registration.php",
-                    data: $("#apply-form input,#apply-form select,#apply-form textarea").serializeArray(),
+                    data: $("#apply-form").serializeArray(),
                     beforeSend:function () {
                         show_loading(button);
                     },

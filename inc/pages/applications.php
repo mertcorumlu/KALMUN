@@ -135,7 +135,7 @@
                                     <td><?=sprintf($Application_Status_Button[$data["status"]],$data["id"])?></td>
                                     <td><?=$data["name"]." ".$data["last_name"]?></td>
                                     <td><?=$data["school"]?></td>
-                                    <td><div class="flag flag-<?=mb_strtolower($data["country"])?>" style="vertical-align:middle"></div> <span><?=$data["country"]?></span></td>
+                                    <td><div class="<?=$data["country"] != "" ? "flag flag-".strtolower($data["country"]) :"" ?>" style="vertical-align: middle"></div> <span><?=$data["country"]?></span></td>
                                     <td><?=$data["email"]?></td>
                                     <td><?=$data["telephone"]?></td>
                                     <td><?=$data["date"]?></td>

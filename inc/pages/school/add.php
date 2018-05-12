@@ -112,7 +112,7 @@ try{
                                     $query = $PDO->query(
                                         "SELECT * FROM `committees`");
 
-                                    //DISPLAY ALL COMMITTEES
+
                                     while($data = $query->fetch(PDO::FETCH_ASSOC))
                                     {
                                         ?>
@@ -127,7 +127,6 @@ try{
                                 <select type="text" class="form-control committee_country" name="quotas[<?=$data["id"]?>][country]" >
                                     <option value="">Please Select...</option>
                                     <?php
-                                    //DISPLAY ALL COUNTRIES
                                     for($i = 0; $i < count($country_array) ; $i++ ){
 
                                     ?>
@@ -174,7 +173,7 @@ try{
                 $.ajax({
                     type: "POST",
                     url: "/inc/ajax/school-add",
-                    data: $("#school_ad_form input,#school_ad_form select,#school_ad_form textarea").serializeArray(),
+                    data: $("#school_ad_form").serializeArray(),
                     beforeSend:function () {
                         show_loading(button);
                     },

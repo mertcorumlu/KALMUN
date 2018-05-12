@@ -27,7 +27,7 @@ function open_popup(url){
                 b.find(".popup-content").html(data);
             },
             error:function () {
-                b.find(".popup-content").html("An Error Occured.");
+                b.find(".popup-content").html('<div class="alert alert-danger text-center">An Error Occured.Please Contact Administrator.</div>');
             }
         });
 
@@ -35,11 +35,11 @@ function open_popup(url){
 
 
 
-    function close_popup(b,c){
+function close_popup(b,c){
     b.fadeOut(300);
     b.remove();
     if(c===true){
-        window.reload();
+        location.reload();
     }
 
     }

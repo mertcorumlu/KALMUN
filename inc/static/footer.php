@@ -14,6 +14,7 @@
 </div>
 </div>
 
+<script src="/inc/js/javascript.js"></script>
 <script type="text/javascript" src="/inc/js/sidebar.js"></script>
 <script src="/inc/js/bootstrap-formhelpers.min.js"></script>
 <script type="text/javascript" src="/inc/js/datatables.min.js"></script>
