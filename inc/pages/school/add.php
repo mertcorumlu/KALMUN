@@ -33,6 +33,7 @@ try{
 
                         <form id="school_ad_form" action="/inc/ajax/school-add" method="POST"  class="needs-validation not-valid" novalidate>
 
+                            <fieldset>
 
                         <div class="form-group row">
 
@@ -153,6 +154,7 @@ try{
                             <button type="submit" class="btn btn-primary " data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing..." >Submit</button>
 
 
+                            </fieldset>
                         </form>
 
                     </div>
@@ -209,12 +211,14 @@ try{
 
 
         function show_loading(a){
+            $("fieldset").attr("disabled",true);
             a.data("original-text",a.html());
             a.attr("disabled", true);
             a.html(a.data("loading-text"));
         }
 
         function hide_loading(a){
+            $("fieldset").attr("disabled",false);
             a.html("Submit");
             a.attr("disabled", false);
         }

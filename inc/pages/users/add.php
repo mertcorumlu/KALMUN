@@ -33,6 +33,7 @@ try{
 
                             <form id="user_ad_form" action="/inc/ajax/user-add" method="POST"  class="needs-validation not-valid" novalidate>
 
+                                <fieldset>
 
                                 <div class="form-group row">
 
@@ -68,9 +69,12 @@ try{
                                             //DISPLAY STATUES
                                             foreach($Auth_Statues as $key => $value)
                                             {
-                                                if($key == "0" || $key == "1"){
-                                                    continue;
+                                                if(auth_level != "0"){
+                                                    if($key == "0" || $key == "1"){
+                                                        continue;
+                                                    }
                                                 }
+
                                                 ?>
                                                 <option value="<?=$key?>"><?=$value?></option>
                                                 <?php
@@ -275,7 +279,7 @@ try{
                                 <div class="alert message"></div>
                                 <button type="submit" class="btn btn-primary " data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing..." >Submit</button>
 
-
+                                </fieldset>
                             </form>
 
                         </div>
@@ -348,7 +352,7 @@ try{
 
         $("#setIndividual").bind("change",function () {
             $("#setSchool").attr("disabled",true);
-            if( $(this).val() === "0" ){
+            if( $(this).val() === "no" ){
                 $("#setSchool").attr("disabled",false);
             }
 
@@ -356,12 +360,14 @@ try{
 
 
         function show_loading(a){
+            $("fieldset").attr("disabled",true);
             a.data("original-text",a.html());
             a.attr("disabled", true);
             a.html(a.data("loading-text"));
         }
 
         function hide_loading(a){
+            $("fieldset").attr("disabled",false);
             a.html("Submit");
             a.attr("disabled", false);
         }
@@ -383,7 +389,7 @@ try{
                         }else if(form.checkValidity() === true){
 
                             form.classList.remove("not-valid");
-                            $("#school_ad_form").triggerHandler("submit");
+                            $("#user_ad_form").triggerHandler("submit");
 
                         }
                         form.classList.add('was-validated');

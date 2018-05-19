@@ -30,7 +30,7 @@ while($country_data = $countries->fetch(PDO::FETCH_ASSOC)){
 }
 
     //SELECT THE PROVIDED SCHOOL
-    $school_data = $PDO->query("
+    $select_query = $PDO->query("
                                                                       SELECT 
                                                                       schools.id,
                                                                       schools.school_name,
@@ -41,8 +41,14 @@ while($country_data = $countries->fetch(PDO::FETCH_ASSOC)){
                                                                        WHERE
                                                                        `id` = {$_GET["id"]}
                                                                        LIMIT 1
-                                                                        ")->fetch(PDO::FETCH_ASSOC);
+                                                                        ");
 
+    if($select_query->rowCount() < 1){
+        echo '<div class="alert alert-danger" >No Such School!</div>';
+        exit;
+    }
+
+    $school_data = $select_query->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -50,7 +56,7 @@ while($country_data = $countries->fetch(PDO::FETCH_ASSOC)){
 
 
             <!--                    <h4 class="c-grey-900 mT-10 mB-30">Data Tables</h4>-->
-            <div class="row">
+    <div class="row" xmlns="http://www.w3.org/1999/html">
 
                 <div class="col-md-12" style="padding:0;">
                     <div class="bgc-white bd bdrs-3 p-20 mB-20">
@@ -58,6 +64,7 @@ while($country_data = $countries->fetch(PDO::FETCH_ASSOC)){
 
                         <form id="school_edit_form" action="" method="POST"  class="needs-validation" >
 
+                            <fieldset>
 
                             <div class="form-group row">
 
@@ -200,6 +207,7 @@ while($country_data = $countries->fetch(PDO::FETCH_ASSOC)){
                             <button type="submit" class="btn btn-primary " data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing..." >Submit</button>
 
 
+                        </fieldset>
                         </form>
 
                     </div>
@@ -255,12 +263,14 @@ while($country_data = $countries->fetch(PDO::FETCH_ASSOC)){
 
 
     function show_loading(a){
+        $("fieldset").attr("disabled",true);
         a.data("original-text",a.html());
         a.attr("disabled", true);
         a.html(a.data("loading-text"));
     }
 
     function hide_loading(a){
+        $("fieldset").attr("disabled",false);
         a.html("Submit");
         a.attr("disabled", false);
     }

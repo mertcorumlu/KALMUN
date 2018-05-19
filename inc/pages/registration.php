@@ -19,9 +19,11 @@ if($auth->isLogged()){
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Registration</title>
 
     <script src="/inc/js/jquery-3.3.1.min.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/inc/img/favicon.ico" />
     <link rel="stylesheet" href="/inc/css/bootstrap.min.css">
     <link rel="stylesheet" href="/inc/css/bootstrap-formhelpers.min.css">
     <link rel="stylesheet" href="/inc/css/font-awesome.css"/>
@@ -39,8 +41,9 @@ if($auth->isLogged()){
 </style>
 <div class="container">
 
-    <img src="/inc/img/kalmun-logo.png" alt="KALMUN" width="150" height="150" style="display:block;margin: 0 auto;">
+    <img src="/inc/img/mun_logo_blue.png" alt="KALMUN" width="250" height="250" style="display:block;margin: 0 auto;">
     <form id="apply-form" class="needs-validation not-valid"  method="POST" novalidate>
+        <fieldset>
 
         <?php
 
@@ -61,6 +64,8 @@ if($auth->isLogged()){
         <div class="alert text-center message"></div>
 
         <button type="submit" class="btn btn-primary float-right" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing..." >Submit</button>
+        </fieldset>
+    </form>
 </div>
 
 <script>
@@ -104,12 +109,14 @@ if($auth->isLogged()){
 
 
     function show_loading(a){
+        $("fieldset").attr("disabled",true);
         a.data("original-text",a.html());
         a.attr("disabled", true);
         a.html(a.data("loading-text"));
     }
 
     function hide_loading(a){
+        $("fieldset").attr("disabled",false);
         a.html("Submit");
         a.attr("disabled", false);
     }

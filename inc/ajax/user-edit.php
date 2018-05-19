@@ -27,8 +27,14 @@ $return = array(
 
 try{
 
-    $userData = $PDO->query("SELECT * FROM `phpauth_users` WHERE `id`= {$_GET["id"]}")
-                ->fetch(PDO::FETCH_ASSOC);
+    $select_query = $PDO->query("SELECT * FROM `phpauth_users` WHERE `id`= {$_GET["id"]}");
+
+    if($select_query->rowCount() < 1){
+        echo '<div class="alert alert-danger" >No Such User!</div>';
+        exit;
+    }
+
+    $userData = $select_query->fetch(PDO::FETCH_ASSOC);
 
     if($userData["auth"] == "1" || $userData["auth"] == "1"){
         is_authorized(auth_level,array(0));
@@ -60,6 +66,8 @@ try{
 
                             <form id="user_edit_form" action="/inc/ajax/user-add" method="POST"  class="needs-validation" >
 
+
+                                <fieldset>
 
                                 <div class="form-group row">
 
@@ -95,8 +103,10 @@ try{
                                             //DISPLAY STATUES
                                             foreach($Auth_Statues as $key => $value)
                                             {
-                                                if($key == "0" || $key == "1"){
-                                                    continue;
+                                                if(auth_level != "0"){
+                                                    if($key == "0" || $key == "1"){
+                                                        continue;
+                                                    }
                                                 }
                                                 ?>
                                                 <option value="<?=$key?>" <?php echo $userData["auth"] == $key ? "selected" :""?>><?=$value?></option>
@@ -116,7 +126,7 @@ try{
                                     <label for="" class="col-sm-2 col-form-label"><strong>Individual Delegate <span class="text-danger">*</span></strong></label>
 
                                     <div class="col-sm-4">
-                                        <select id="setIndividual" class="form-control" name="user_is_individual" required <?php echo $userData["is_individual"] != "" ? "" : "disabled" ?>>
+                                        <select id="setIndividual" class="form-control" name="user_is_individual" required <?php echo $userData["auth"] == "4" ? "" : "disabled" ?>>
                                             <option value="">Please Select...</option>
                                             <option value="yes" <?php echo $userData["is_individual"] == "1" ? "selected" : "" ?>>Yes</option>
                                             <option value="no" <?php echo $userData["is_individual"] == "0" ? "selected" : "" ?>>No</option>
@@ -223,7 +233,7 @@ try{
                                     <label for="" class="col-sm-2 col-form-label"><strong>Represented Country <span class="text-danger">*</span></strong></label>
 
                                     <div class="col-sm-4">
-                                        <select id="setCountry" class="form-control school_country" name="user_represented_country_id" required <?php echo $userData["country_id"] != "" ? "" : "disabled" ?>>
+                                        <select id="setCountry" class="form-control school_country" name="user_represented_country_id" required <?php echo $userData["auth"] == ("4") ? "" : "disabled" ?>>
                                             <option value="">Please Select...</option>
                                             <?php
                                             //DISPLAY COUNTRIES IN SELECT OPTION
@@ -247,7 +257,7 @@ try{
                                     <label for="" class="col-sm-2 col-form-label"><strong>Committee <span class="text-danger">*</span></strong></label>
 
                                     <div class="col-sm-4">
-                                        <select id="setCommittee" class="form-control school_country" name="user_committee_id" required <?php echo $userData["committee_id"] != "" ? "" : "disabled" ?>>
+                                        <select id="setCommittee" class="form-control school_country" name="user_committee_id" required <?php echo $userData["auth"] == "4" ? "" : "disabled" ?>>
                                             <option value="">Please Select...</option>
                                             <?php
 
@@ -301,6 +311,7 @@ try{
                                 <button type="submit" class="btn btn-primary " data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing..." >Submit</button>
 
 
+                                </fieldset>
                             </form>
 
                         </div>
@@ -380,12 +391,14 @@ try{
 
 
         function show_loading(a){
+            $("fieldset").attr("disabled",true);
             a.data("original-text",a.html());
             a.attr("disabled", true);
             a.html(a.data("loading-text"));
         }
 
         function hide_loading(a){
+            $("fieldset").attr("disabled",false);
             a.html("Submit");
             a.attr("disabled", false);
         }

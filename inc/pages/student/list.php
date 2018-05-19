@@ -5,10 +5,6 @@
  * Date: 10/05/2018
  * Time: 16:34
  */
-try{
-    $count_users = $PDO->query("SELECT COUNT(id) as 'count',isactive FROM phpauth_users WHERE isactive = 0")
-        ->fetch(PDO::FETCH_ASSOC);
-
 
 ?>
 
@@ -18,30 +14,6 @@ try{
 
         <div class="container-fluid" style="padding:0;">
             <!--                    <h4 class="c-grey-900 mT-10 mB-30">Data Tables</h4>-->
-            <?php
-            if($count_users["count"] > 0){
-
-
-            ?>
-            <div class="row">
-
-                <div class="col-md-12" style="padding:0;">
-
-                   <div class="alert alert-danger text-center"><?=$count_users["count"]?> User Waiting For Activation</div>
-
-
-                </div>
-
-
-            </div>
-
-            <?php
-            }
-            ?>
-
-
-
-
             <div class="row">
 
                 <div class="col-md-12" style="padding:0;">
@@ -55,10 +27,9 @@ try{
                             <thead>
 
                             <tr>
-                                <th>ID</th>
+                                <th>Statue</th>
                                 <th>Active</th>
                                 <th>Full Name</th>
-                                <th>Statue</th>
                                 <th>E-mail</th>
                                 <th>Telephone</th>
                                 <th>Representing Country</th>
@@ -71,7 +42,7 @@ try{
                             <tbody>
 
                             <?php
-
+                            try{
 
                                 /*
                                  * SELECT ALL SCHOOLS
@@ -103,12 +74,16 @@ try{
                                                                     LEFT JOIN
                                                                       `schools`
                                                                     ON
-                                                                      schools.advisor_id = phpauth_users.id 
+                                                                       schools.id = phpauth_users.school_id
                                                                       
                                                                     LEFT JOIN
                                                                       `countries`
                                                                     ON
                                                                       countries.id = phpauth_users.country_id
+                                                                      WHERE
+                                                                      phpauth_users.school_id = {$userData["advisor_school"]} 
+                                                                      AND 
+                                                                      phpauth_users.auth = '4'
                                                                     
                                                                         ");
 
@@ -121,45 +96,45 @@ try{
                                     ?>
 
                                     <tr>
-                                        <td><strong><?=$data["id"]?></strong></td>
-                                        <td><?php echo $data["isactive"] == 1 ? "Yes" : "<span class=\"text-danger\" >No</span> " ?></td>
-                                        <td><?=$data["name"]?><?=$data["school_name"] ? "<strong> (".$data["school_name"].")</strong>" : ""?></td>
+
                                         <td>
                                             <strong>
-                                            <?php
-                                            switch ($data["auth"]){
+                                                <?php
+                                                switch ($data["auth"]){
 
-                                                case 0;
-                                                echo '<span class="text-secondary">'.$Auth_Statues[$data["auth"]].'</span>';
-                                                break;
+                                                    case 0;
+                                                        echo '<span class="text-secondary">'.$Auth_Statues[$data["auth"]].'</span>';
+                                                        break;
 
-                                                case 1;
-                                                    echo '<span class="text-danger">'.$Auth_Statues[$data["auth"]].'</span>';
-                                                    break;
+                                                    case 1;
+                                                        echo '<span class="text-danger">'.$Auth_Statues[$data["auth"]].'</span>';
+                                                        break;
 
-                                                case 2;
-                                                    echo '<span class="text-success">'.$Auth_Statues[$data["auth"]].'</span>';
-                                                    break;
+                                                    case 2;
+                                                        echo '<span class="text-success">'.$Auth_Statues[$data["auth"]].'</span>';
+                                                        break;
 
-                                                case 3;
-                                                    echo '<span class="text-warning">'.$Auth_Statues[$data["auth"]].'</span>';
-                                                    break;
+                                                    case 3;
+                                                        echo '<span class="text-warning">'.$Auth_Statues[$data["auth"]].'</span>';
+                                                        break;
 
-                                                case 4;
-                                                    echo '<span class="text-primary">'.$Auth_Statues[$data["auth"]].'</span>';
-                                                    break;
+                                                    case 4;
+                                                        echo '<span class="text-primary">'.$Auth_Statues[$data["auth"]].'</span>';
+                                                        break;
 
 
-                                            }
-                                            ?>
+                                                }
+                                                ?>
                                             </strong>
                                         </td>
+                                        <td><?php echo $data["isactive"] == 1 ? "Yes" : "<span class=\"text-danger\" >No</span> " ?></td>
+                                        <td><?=$data["name"]?></td>
                                         <td><?=$data["email"]?></td>
                                         <td><?=$data["telephone"]?></td>
                                         <td><div class=" <?=$data["flag"] != "" ? "flag flag-".strtolower($data["flag"]) :"" ?>" style="vertical-align: middle"></div><?=$data["country_name"]?></td>
-                                        <td><?=$data["committee_name"]?></td>
+                                        <td><strong><?=$data["committee_name"]?></strong></td>
                                         <td>
-                                            <button type="button" class="btn btn-primary" onclick="open_popup('/inc/ajax/user-edit?id=<?=$data["id"]?>')">Edit</button>
+                                            <button type="button" class="btn btn-primary" onclick="open_popup('/inc/ajax/student-edit?id=<?=$data["id"]?>')">Edit</button>
                                         </td>
 
 
@@ -186,15 +161,15 @@ try{
             </div>
         </div>
 
-        <script>
-
-
-            $(document).ready( function () {
-                $('.DataTable').DataTable({
-                    "order":[[0,"asc"]]
-                });
-            } );
-        </script>
+<!--        <script>-->
+<!---->
+<!---->
+<!--            $(document).ready( function () {-->
+<!--                $('.DataTable').DataTable({-->
+<!--                    "order":[[6,"asc"]]-->
+<!--                });-->
+<!--            } );-->
+<!--        </script>-->
 
     </div>
 </main>

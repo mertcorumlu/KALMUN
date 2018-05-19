@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
 
+    <link rel="shortcut icon" type="image/x-icon" href="/inc/img/favicon.ico" />
+
     <script src="/inc/js/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="/inc/css/bootstrap.min.css">
     <link rel="stylesheet" href="/inc/css/bootstrap-formhelpers.min.css">
@@ -27,16 +29,18 @@
     });
 </script>
 <div class="peers ai-s fxw-nw h-100vh">
-    <div class="d-n@sm- peer peer-greed h-100 pos-r bgr-n bgpX-c bgpY-c bgsz-cv" style='background-image: url("/inc/img/bg.jpg")'>
+    <div class="d-n@sm- peer peer-greed h-100 pos-r bgr-n bgpX-c bgpY-c bgsz-cv" style='background-image: url("/inc/img/1488560405img__0.jpg")'>
         <div class="pos-a centerXY">
-            <div class="bgc-white bdrs-50p pos-r" style='width: 120px; height: 120px;'>
-                <img class="pos-a centerXY" src="/inc/img/logo.png" alt="">
+            <div class="bgc-white bdrs-50p pos-r" style='width: 300px; height: 300px;'>
+                <img class="pos-a centerXY" src="/inc/img/mun_panel_logo.png" style='width: 230px; height: 230px;' alt="MUN LOGO">
             </div>
         </div>
     </div>
     <div class="col-12 col-md-4 peer pX-40 pY-80 h-100 bgc-white scrollable pos-r" style='min-width: 320px;'>
         <h4 class="fw-300 c-grey-900 mB-40">Login</h4>
+
         <form action="/ajax/login" method="POST" id="login_form" class="needs-validation not-valid"  novalidate>
+            <fieldset>
 
             <div class="alert message" style="display: none"></div>
             <div class="form-group">
@@ -64,7 +68,9 @@
             </div>
 
             <br>
-            <button type="submit" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing..." class="btn btn-primary">Submit</button>
+            <button type="submit" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing..." class="btn btn-primary">Log In</button>
+
+            </fieldset>
         </form>
         <script>
             var button = $("button[type=submit]");
@@ -106,7 +112,7 @@
             });
 
             function show_loading(a){
-                $("#login_form input").attr("disabled",true);
+                $("fieldset").attr("disabled",true);
                 a.data("original-text",a.html());
                 a.attr("disabled", true);
                 a.html(a.data("loading-text"));
@@ -114,7 +120,7 @@
 
             function hide_loading(a){
                 $("#login_form").removeClass("was-validated").addClass("not-valid");
-                $("#login_form input").attr("disabled",false);
+                $("fieldset").attr("disabled",false);
                 $("#login_form input[type=password]").val("");
                 a.html("Submit");
                 a.attr("disabled", false);

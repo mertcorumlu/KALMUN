@@ -28,7 +28,7 @@ if(post("user_email")=="" || post("user_password")=="" ){
 }
 
 //MAKE LOGIN WITH PHPAUTH
-$return = $auth->login(post("user_email"),post("user_password"),post("remember_me"));
+$return = $auth->login(post("user_email"),post("user_password"),(int) post("remember_me"));
 
 //HANDLE LOGIN ERRORS
 if($return["error"]==true){

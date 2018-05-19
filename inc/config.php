@@ -73,30 +73,31 @@ $mail_type = array(
         "subject" =>"You Application Has Been Approved.",
         "body" => "
 Dear Participant,<br><br>
-We have just approved your submisson.Your control panel account has been created automatically.<br>
-Make sure that you account is not activated.You will get noticed with email once it gets activated.<br><br>
+We have just approved your submission. Your control panel account has been created automatically.<br>
+Make sure that your account is not activated yet. You will get noticed with email once it gets activated.<br><br>
 E-mail : <strong>%s</strong><br>
 Password : <strong>%s</strong><br><br>
-<p>You can change your password from system anytime you want.</p>
+<p>You can change your password from system anytime.</p>
 "
     ),
     2 =>array(
         "subject" => "You Application Has Been Rejected.",
         "body" => "
 Dear Participant,<br><br>
-Unfurtunately we have rejected your submission.<br>
+Unfourtunately we have rejected your submission.<br>
 
 "
     )
 );
 
 //ADD USER MAILS
+$addeditSubject = "KALMUN Panel Account";
 $addEditUserMail = "
 Dear Participant,<br><br>
 Your control panel account is :<br>
 E-mail : <strong>%s</strong><br>
 Password : <strong>%s</strong><br><br>
-<p>You can change your password from system anytime you want.</p>
+<p>You can change your password from system anytime.</p>
 ";
 
 

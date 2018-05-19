@@ -47,7 +47,7 @@ try{
     $PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }catch (PDOException $e){
     http_response_code(500);
-    die("Database Connection Failed.");
+    die("<h1>Database Connection Failed.</h1>");
 }
 
 
@@ -65,16 +65,18 @@ try{
 
 //Load PHPMailer
 $phpmailer = new PHPMailer();
-//$phpmailer->isSMTP();
-//$phpmailer->SMTPDebug = 4;
-//$phpmailer->Host = 'localhost'; // duzenlenecek
-//$phpmailer->SMTPAuth = true;
-//$phpmailer->Username = 'info@kalthefest.org'; // duzenlenecek
-//$phpmailer->Password = 'TaTar5544'; // duzenlenecek
+$phpmailer->isSMTP();
+//$phpmailer->SMTPDebug = 0;
+$phpmailer->SMTPSecure = false;
+$phpmailer -> SMTPAutoTLS = false;
+$phpmailer->Host = "mail.kalmun.org";
+$phpmailer->SMTPAuth = true;
+$phpmailer->Username = 'noreply@kalmun.org'; // duzenlenecek
+$phpmailer->Password = 'WJza46H2'; // duzenlenecek
 //$phpmailer->SMTPSecure = 'tls'; // duzenlenecek
-//$phpmailer->Port = 587; // duzenlenecek
-$phpmailer->From = 'info@kalthefest.org'; // duzenlenecek
-$phpmailer->FromName = 'KAL Model Unites Nations'; // duzenlenecek
+$phpmailer->Port = 587; // duzenlenecek
+$phpmailer->From = 'noreply@kalmun.org'; // duzenlenecek
+$phpmailer->FromName = 'KAL Model United Nations'; // duzenlenecek
 $phpmailer->AddReplyTo("info@kalmun.org");
 
 

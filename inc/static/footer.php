@@ -8,8 +8,15 @@
 
 ?>
 <!-- ### $App Screen Footer ### -->
-<footer class="bdT ta-c p-30 lh-0 fsz-sm c-grey-600">
-    <span>Copyright © 2018 Designed by <a href="https://colorlib.com" target="_blank" title="Colorlib">Mert ÇORUMLU</a>. All rights reserved.</span>
+<footer class="bdT ta-c p-10 fsz-sm c-grey-600">
+
+            <span class=" text-center">Copyright 2018 Designed by
+                <a href="https://colorlib.com" target="_blank" title="Colorlib">Mert ÇORUMLU</a>.
+                <br>
+            All Rights Reserved.</span>
+
+
+
 </footer>
 </div>
 </div>

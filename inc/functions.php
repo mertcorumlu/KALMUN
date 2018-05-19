@@ -140,7 +140,8 @@ function check_login($PDO,$auth,$auth_levels = array()){
 
             if(!in_array($fetch["auth"],$auth_levels)){
 
-                include("inc/pages/unauthorized.php");
+                http_response_code(403);
+                include("pages/unauthorized.php");
                 exit;
 
             }else{

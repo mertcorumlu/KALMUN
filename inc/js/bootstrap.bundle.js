@@ -3637,7 +3637,7 @@
      *
      * All the DOM manipulations are limited to this modifier. This is useful in case
      * you want to integrate Popper.js inside a framework or view library and you
-     * want to delegate all the DOM manipulations to it.
+     * want to student all the DOM manipulations to it.
      *
      * Note that if you disable this modifier, you must make sure the popper element
      * has its position set to `absolute` before Popper.js can do its work!

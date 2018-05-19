@@ -103,9 +103,88 @@
 
             </li>
 
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle" href="javascript:void(0);">
+                <span class="icon-holder">
+                    <i class="c-blue-500 fa fa-gavel"></i>
+                  </span>
+                        <span class="title">Committees</span>
+
+                        <span class="arrow">
+                    <i class="ti-angle-right"></i>
+                  </span>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="sidebar-link" href="/committee/list">List Committees</a>
+                            </li>
+                            <li>
+                                <a class="sidebar-link" href="/committee/add">Add New Committee</a>
+                            </li>
+
+                        </ul>
+                    </a>
+
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle" href="javascript:void(0);">
+                <span class="icon-holder">
+                    <i class="c-blue-500 fa fa-globe"></i>
+                  </span>
+                        <span class="title">Countries</span>
+
+                        <span class="arrow">
+                    <i class="ti-angle-right"></i>
+                  </span>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="sidebar-link" href="/country/list">List Countries</a>
+                            </li>
+                            <li>
+                                <a class="sidebar-link" href="/country/add">Add New Country</a>
+                            </li>
+
+                        </ul>
+                    </a>
+
+                </li>
+
                 <?php
             }
             ?>
+
+            <?php
+            if(is_authorized(auth_level,array(3))) {
+                ?>
+
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle" href="javascript:void(0);">
+                <span class="icon-holder">
+                    <i class="c-blue-500 fa fa-user-circle"></i>
+                  </span>
+                        <span class="title">Students</span>
+
+                        <span class="arrow">
+                    <i class="ti-angle-right"></i>
+                  </span>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="sidebar-link" href="/student/list">List Your Students</a>
+                            </li>
+                            <li>
+                                <a class="sidebar-link" href="/student/add">Add New Student</a>
+                            </li>
+
+                        </ul>
+                    </a>
+
+                </li>
+
+                <?php
+            }
+            ?>
+
+
 
         </ul>
     </div>

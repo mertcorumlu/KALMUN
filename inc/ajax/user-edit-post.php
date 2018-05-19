@@ -11,13 +11,13 @@ use ZxcvbnPhp\Zxcvbn;
 include '../loader.php';
 
 if(!$_POST){
-
+echo 'test';
     http_response_code(404);
     exit;
 
 }
 
-check_login($PDO,$auth,array(0,1));
+check_login($PDO,$auth,array(0,1,3));
 
 $return = array(
     "error" => true,
@@ -45,7 +45,7 @@ try{
     }
 
 
-    $PDO->query("UPDATE `phpauth_users` SET `is_individual` = null ,`school_id` = null,`committee_id` = null,`country_id` = null ");
+    $PDO->query("UPDATE `phpauth_users` SET `is_individual` = null,`school_id` = null,`committee_id` = null,`country_id` = null WHERE `id` = {$userId} ");
 
     $updateArray = array();
 
@@ -69,6 +69,17 @@ try{
 
         $updateArray["committee_id"] = post("user_committee_id");
 
+    }else if(post("user_statue") == ("0"||"1") ){
+
+        if(auth_level != "0"){
+            $return = array(
+                "error" => true,
+                "message" => "Only Super Admins Can Edit Super Admins Or Moderators."
+            );
+
+
+        }
+
     }
 
     if(!empty(post("user_is_individual"))){
@@ -80,6 +91,19 @@ try{
         }
 
     }
+
+    //IF AN ADVISOR TRYING TO EDIT A USER
+    if(auth_level == "3"){
+        $updateArray["auth"] = "4";
+        $updateArray["country_id"] = post("user_represented_country_id");
+        $updateArray["committee_id"]= post("user_committee_id");
+        $updateArray["is_individual"] = "0";
+        $updateArray["school_id"] = post("user_school_id");
+        unset($updateArray["isactive"]);
+    }
+
+//    var_dump($updateArray);
+//    exit;
 
     $mail = false;
     $password = null;
@@ -110,14 +134,15 @@ try{
         array_push($update,"`".$a.'` = "'.$b.'"');
     }
 
-    $PDO->query("
+    $query = "
     UPDATE
   `phpauth_users`
     SET
     ".implode(',',$update)."
     WHERE
   `id` = {$userId}
-    ");
+    ";
+    $PDO->query($query);
 
     /*
      *
@@ -126,7 +151,7 @@ try{
     //IF $mail == FALSE JUST GIVE INFORMATION ABOUT THE RESULT
     if($mail==false){
         $return["error"] = false;
-        $return["message"] = "User sucessfully Edited.<br> Email: ".post("user_email")."<br> Password :".@$password;
+        $return["message"] = "User sucessfully Edited.<br> Email: ".post("user_email")."<br> Password :".@$password."<br>";
         $PDO->query("COMMIT");
         return_error($return);
     }
@@ -138,7 +163,7 @@ try{
     $phpmailer->isHTML(true);
 
     //EMAIL TEMPLATE PROVIDED FROM config.php
-    $phpmailer->Subject = "KALMUN PANEL ACCOUNT";
+    $phpmailer->Subject = $addeditSubject;
     $phpmailer->Body    = sprintf($addEditUserMail,@post("user_email"),@$password);
     $phpmailer->CharSet = 'UTF-8';
 
@@ -160,7 +185,7 @@ try{
 
     $return = array(
         "error" => false,
-        "message" => "User Succesfully Edited.Mail Sent."
+        "message" => "User Succesfully Edited. Mail Sent."
     );
     return_error($return);
 
