@@ -77,33 +77,7 @@ try{
                             </div>
                         </div>
 
-
-                        <div class="form-group row">
-
-                                <label for="" class="col-sm-2 col-form-label"><strong>Country <span class="text-danger">*</span></strong></label>
-
-                                <div class="col-sm-4">
-                                    <select class="form-control school_country" name="school_country_id" required>
-                                        <option value="">Please Select...</option>
-                                        <?php
-                                        //DISPLAY COUNTRIES IN SELECT OPTION
-                                        for($i = 0; $i < count($country_array) ; $i++ ){
-
-                                            ?>
-                                            <option value="<?=$country_array[$i]["id"]?>"><?=$country_array[$i]["country_name"]?></option>
-
-                                            <?php
-                                        }
-                                        ?>
-                                    </select>
-
-                                    <div class="invalid-feedback">
-                                        Please select a country.
-                                    </div>
-                                </div>
-                            </div>
-
-                        <hr>
+                                <hr>
                         <h4>Quota</h4>
                         <hr>
 
@@ -118,14 +92,14 @@ try{
                                     {
                                         ?>
 
-                        <div class="form-group row">
+                        <div class="form-group row commitee-<?=$data["id"]?>">
 
                             <label for="" class="col-sm-2 col-form-label">
-                                <strong><?=$data["committee_name"]?> </strong>
+                                <strong class="committee-name"><?=$data["committee_name"]?> </strong>
                             </label>
 
                             <div class="col-sm-3">
-                                <select type="text" class="form-control committee_country" name="quotas[<?=$data["id"]?>][country]" >
+                                <select type="text" class="form-control committee_country" name="quotas[<?=$data["id"]?>][country][]" >
                                     <option value="">Please Select...</option>
                                     <?php
                                     for($i = 0; $i < count($country_array) ; $i++ ){
@@ -138,14 +112,29 @@ try{
                                     ?>
 
                                 </select>
-                                <small>Please <span class="text-danger">Do Not</span> Change If You Are Not Interested In How To Use It.</small>
 
                             </div>
                                 <label for="" class="col-sm-1 ">
-                                    <input type="number" class="form-control" name="quotas[<?=$data["id"]?>][quota]" min="0" max="20" value="0">
+                                    <input type="number" class="form-control" name="quotas[<?=$data["id"]?>][quota][]" min="0" max="20" value="0">
                                 </label>
+
+
+                            <div class="col-sm-1">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-success add" type="button"  onclick="education_fields('commitee-<?=$data["id"]?>');"> <span class="fa fa-plus" aria-hidden="true"></span> </button>
+                                </div>
+                            </div>
+
+
+
                         </div>
 
+                                        <div class="import-field commitee-<?=$data["id"]?>">
+
+
+
+                                        </div>
+                                        <hr>
                                         <?php
                                     }
                         ?>
@@ -165,6 +154,7 @@ try{
 </main>
 
     <script>
+
         var button = $("button[type=submit]");
 
         $("#school_ad_form").on("submit",function (e) {
@@ -223,8 +213,26 @@ try{
             a.attr("disabled", false);
         }
 
+        function  education_fields(a) {
+            var to_import = $(".form-group."+a).html();
+            var b = $($(to_import));
+            var formgroup = $("<div></div>").addClass("form-group row toDelete");
+            b.find("select").prop('selectedIndex',0);
+            b.find("input[type=number]").val("0");
+            b.find(".committee-name").html("");
+            b.find(".btn.add").removeClass("btn-success").addClass("btn-danger").attr("onclick","delete_itself($(this))")
+                .find("span.fa.fa-plus").removeClass("fa-plus").addClass("fa-minus");
+            formgroup.append(b);
+            $(".import-field."+a).append(formgroup);
+        }
 
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        function delete_itself(a){
+            a.parents("div.form-group.toDelete").eq(0).remove();
+        }
+
+
+
+        //Example starter JavaScript for disabling form submissions if there are invalid fields
         (function() {
             'use strict';
             window.addEventListener('load', function() {

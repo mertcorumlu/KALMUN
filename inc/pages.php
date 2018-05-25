@@ -79,7 +79,8 @@ switch(get("page")){
     case "student":
         $title = "Students";
         $include_page = "student";
-        $head = "<link rel=\"stylesheet\" href=\"/inc/css/popup.css\"/>";
+        $head = "<style>input[type=text]{text-transform: capitalize}</style>
+                 <link rel='stylesheet' href='/inc/css/popup.css'>";
         $footer = "<script src=\"/inc/js/popup.js\"></script>";
         $auth_levels = array(3);
         break;

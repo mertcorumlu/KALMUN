@@ -32,7 +32,7 @@ try{
                           ON
                           schools.advisor_id = phpauth_users.id
                           WHERE phpauth_users.id = 
-                          '".$auth->getCurrentUID()."'")->fetch(PDO::FETCH_ASSOC) ;
+                          '".$auth->getCurrentUID()."';")->fetch(PDO::FETCH_ASSOC) ;
 
 
                     if(!defined("auth_level"))
@@ -48,9 +48,11 @@ try{
                                     FROM 
                                     `phpauth_users`
                                   WHERE
-                                    school_id = ".$userData["advisor_school"])->rowCount() < 1 ){
+                                    `school_id` = '".$userData["advisor_school"]."';")->rowCount() < 1 ){
+										
+									
 
-                  if($_GET["page"] != "student" && $_GET["subpage"] != "add"  ){
+                  if(@$_GET["page"] != "student" && @$_GET["subpage"] != "add"  ){
                       echo '<script>location.replace("/student/add")</script>';
                       exit;
                   }

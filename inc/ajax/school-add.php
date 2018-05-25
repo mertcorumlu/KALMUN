@@ -27,11 +27,10 @@ try{
 
     $PDO->query("START TRANSACTION");
 
-    $PDO->prepare("INSERT INTO `schools` SET `school_name` = :school_name, `advisor_id` = :advisor_id,`country_id`=:country_id ")
+    $PDO->prepare("INSERT INTO `schools` SET `school_name` = :school_name, `advisor_id` = :advisor_id")
         ->execute(array(
             "school_name" => ucfirst(trim(post("school_name"))),
-            "advisor_id" => post("advisor_id"),
-            "country_id" => post("school_country_id")
+            "advisor_id" => post("advisor_id")
 
         ));
 
@@ -39,18 +38,22 @@ try{
 
     $PDO->query("DELETE FROM `committee_structure` WHERE `school_id`='{$school_id}' ");
 
-    foreach($_POST["quotas"] as $key => $value){
+    foreach($_POST["quotas"] as $key => $value) {
 
-        if($value["quota"] > 0){
+        foreach ($value["country"] as $a => $b) {
 
-            $PDO->prepare("INSERT INTO `committee_structure` SET `committee_id` = :committee_id, `country_id` = :country_id , `school_id` = :school_id , `quota` = :quota")
-                ->execute(array(
-                    "committee_id" => $key,
-                    "country_id" => $value["country"],
-                    "school_id" => $school_id,
-                    "quota" => $value["quota"]
-                ));
+            if (($value["quota"][$a] > 0 && !empty($value["quota"][$a])) && (!empty($b) && $b > 0) ) {
 
+
+                $PDO->prepare("INSERT INTO `committee_structure` SET `committee_id` = :committee_id, `country_id` = :country_id , `school_id` = :school_id , `quota` = :quota")
+                    ->execute(array(
+                        "committee_id" => $key,
+                        "country_id" => $b,
+                        "school_id" => $school_id,
+                        "quota" => $value["quota"][$a]
+                    ));
+
+            }
         }
 
     }
@@ -71,6 +74,7 @@ try{
         "error" => true,
         "message" => $e->errorInfo[2]
     );
+
     $PDO->query("ROLLBACK;");
     return_error($return);
     

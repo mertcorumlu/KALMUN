@@ -29,7 +29,6 @@
                                 <th>ID</th>
                                 <th>School Name</th>
                                 <th>Advisor</th>
-                                <th>Country</th>
                                 <th>Structure</th>
                                 <th>Action</th>
 
@@ -47,19 +46,15 @@
                                 $applications = $PDO->query("SELECT 
                                                                       schools.id as school_id,
                                                                       schools.school_name,
-                                                                      CONCAT(phpauth_users.name,\" \",phpauth_users.surname) AS advisor_name,
-                                                                      countries.country_name,
-                                                                      countries.flag
+                                                                      CONCAT(phpauth_users.name,\" \",phpauth_users.surname) AS advisor_name
+                                                                      
                                                                        FROM 
                                                                        `schools` 
                                                                        LEFT JOIN 
                                                                        `phpauth_users`
                                                                         ON 
                                                                         schools.advisor_id = phpauth_users.id
-                                                                        LEFT JOIN
-                                                                        `countries`
-                                                                        ON 
-                                                                        schools.country_id = countries.id
+                                                                      
                                                                         ");
 
                                 /*
@@ -74,7 +69,6 @@
                                         <td><strong><?=$data["school_id"]?></strong></td>
                                         <td><?=$data["school_name"]?></td>
                                         <td><?=$data["advisor_name"]?></td>
-                                        <td><div class=" <?=$data["flag"] != "" ? "flag flag-".strtolower($data["flag"]) :"" ?>" style="vertical-align: middle"></div><?=$data["country_name"]?></td>
 
                                         <td>
                                             <?php

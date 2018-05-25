@@ -58,6 +58,7 @@ try{
                                 <th>ID</th>
                                 <th>Active</th>
                                 <th>Full Name</th>
+                                <th>School</th>
                                 <th>Statue</th>
                                 <th>E-mail</th>
                                 <th>Telephone</th>
@@ -103,7 +104,7 @@ try{
                                                                     LEFT JOIN
                                                                       `schools`
                                                                     ON
-                                                                      schools.advisor_id = phpauth_users.id 
+                                                                      schools.advisor_id = phpauth_users.id OR schools.id = phpauth_users.school_id
                                                                       
                                                                     LEFT JOIN
                                                                       `countries`
@@ -123,7 +124,8 @@ try{
                                     <tr>
                                         <td><strong><?=$data["id"]?></strong></td>
                                         <td><?php echo $data["isactive"] == 1 ? "Yes" : "<span class=\"text-danger\" >No</span> " ?></td>
-                                        <td><?=$data["name"]?><?=$data["school_name"] ? "<strong> (".$data["school_name"].")</strong>" : ""?></td>
+                                        <td><?=$data["name"]?></td>
+                                        <td><?=$data["school_name"]?></td>
                                         <td>
                                             <strong>
                                             <?php

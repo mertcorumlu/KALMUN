@@ -229,7 +229,7 @@ try{
 
 
                             <hr>
-                            <h4 class="c-grey-900 mT-10 mB-30">Add New User</h4>
+                            <h4 class="c-grey-900 mT-10 mB-30">Add New Student</h4>
 
                             <form id="user_ad_form" action="/inc/ajax/user-add" method="POST"  class="needs-validation not-valid"  novalidate>
 

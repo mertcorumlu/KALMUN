@@ -56,6 +56,7 @@ try{
     $updateArray["name"] = ucfirst(post("user_name"));
     $updateArray["surname"] = ucfirst(post("user_last_name"));
     $updateArray["auth"] = post("user_statue");
+    $updateArray["email"] = post("user_email");
     $updateArray["telephone"] = post("user_telephone");
     $updateArray["country"] = post("user_country");
     $updateArray["isactive"] = post("user_is_active");

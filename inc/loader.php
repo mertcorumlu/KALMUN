@@ -67,14 +67,14 @@ try{
 $phpmailer = new PHPMailer();
 $phpmailer->isSMTP();
 //$phpmailer->SMTPDebug = 0;
-$phpmailer->SMTPSecure = false;
-$phpmailer -> SMTPAutoTLS = false;
-$phpmailer->Host = "mail.kalmun.org";
-$phpmailer->SMTPAuth = true;
-$phpmailer->Username = 'noreply@kalmun.org'; // duzenlenecek
-$phpmailer->Password = 'WJza46H2'; // duzenlenecek
-//$phpmailer->SMTPSecure = 'tls'; // duzenlenecek
-$phpmailer->Port = 587; // duzenlenecek
+//$phpmailer->SMTPSecure = false;
+//$phpmailer -> SMTPAutoTLS = false;
+//$phpmailer->Host = "mail.kalmun.org";
+//$phpmailer->SMTPAuth = true;
+//$phpmailer->Username = 'noreply@kalmun.org'; // duzenlenecek
+//$phpmailer->Password = 'WJza46H2'; // duzenlenecek
+////$phpmailer->SMTPSecure = 'tls'; // duzenlenecek
+//$phpmailer->Port = 587; // duzenlenecek
 $phpmailer->From = 'noreply@kalmun.org'; // duzenlenecek
 $phpmailer->FromName = 'KAL Model United Nations'; // duzenlenecek
 $phpmailer->AddReplyTo("info@kalmun.org");

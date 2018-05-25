@@ -36,10 +36,12 @@ try{
 
     $userData = $select_query->fetch(PDO::FETCH_ASSOC);
 
-    if($userData["auth"] == "1" || $userData["auth"] == "1"){
-        is_authorized(auth_level,array(0));
-        echo '<div class="alert alert-danger" >Only Super Admins Can Edit Moderators or Super Admins.</div>';
-        exit;
+    if($userData["auth"] == "0" || $userData["auth"] == "1"){
+        if(!is_authorized(auth_level,array(0))){
+            echo '<div class="alert alert-danger" >Only Super Admins Can Edit Moderators or Super Admins.</div>';
+            exit;
+        }
+
 
     }
 

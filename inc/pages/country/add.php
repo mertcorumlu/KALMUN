@@ -9,6 +9,14 @@
 
 try{
 
+    //SELECT ALL COUNTRIES TO ADD SELECT OPTIONS
+    $country_array = array();
+    $countries = $PDO->query("SELECT `id`,`country_name` FROM `countries` ");
+
+    //PUSH COUNTRY IDS AND COUNTRY NAME IN AN ARRAY
+    while($country_data = $countries->fetch(PDO::FETCH_ASSOC)){
+        array_push($country_array,$country_data);
+    }
 
 ?>
 
@@ -23,22 +31,27 @@ try{
                     <div class="bgc-white bd bdrs-3 p-20 mB-20">
                         <h4 class="c-grey-900 mT-10 mB-30">Add New Committee</h4>
 
-                        <form id="committee_add_form" action="/inc/ajax/committee-add" method="POST"  class="needs-validation not-valid" novalidate>
+                        <form id="country_add_form" action="/inc/ajax/country-add" method="POST"  class="needs-validation not-valid" novalidate>
 
                             <fieldset>
 
-                        <div class="form-group row">
+                                <div class="form-group row">
 
-                            <label for="" class="col-sm-2 col-form-label"><strong>Committee Name <span class="text-danger">*</span></strong></label>
+                                    <label for="" class="col-sm-2 col-form-label"><strong>Country <span class="text-danger">*</span></strong></label>
 
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" name="committee_name" style="text-transform: " placeholder="e.g. OSSASA" required>
+                                    <div class="col-sm-4">
+                                        <select class="input-medium bfh-countries form-control" data-countryList="US,AG,AU"
+                                                 name="country_iso" required>
 
-                                <div class="invalid-feedback">
-                                    Please enter a valid committee name.
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a valid country.
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+
+                                <input type="hidden" name="country_name" value="">
+
 
 
                             <hr>
@@ -59,15 +72,19 @@ try{
     <script>
         var button = $("button[type=submit]");
 
-        $("#committee_add_form").on("submit",function (e) {
+        $(".bfh-countries").bind("change",function () {
+            $("form input[name=country_name]").attr("value",$(this).find(":selected").html());
+        });
+
+        $("#country_add_form").on("submit",function (e) {
             e.preventDefault();
 
-            if(!$("#committee_add_form").hasClass("not-valid")){
+            if(!$("#country_add_form").hasClass("not-valid")){
 
                 $.ajax({
                     type: "POST",
-                    url: "/inc/ajax/committee-add",
-                    data: $("#committee_add_form").serializeArray(),
+                    url: "/inc/ajax/country-add",
+                    data: $("#country_add_form").serializeArray(),
                     beforeSend:function () {
                         show_loading(button);
                     },
@@ -83,7 +100,7 @@ try{
                             return 0;
                         }
 
-                        $("form").html("<div class=\"alert alert-success text-center\" >"+data.message+"<br><a href='/committee/list'>List Committees</a></div>");
+                        $("form").html("<div class=\"alert alert-success text-center\" >"+data.message+"<br><a href='/country/list'>List Countries</a></div>");
 
 
 
@@ -94,13 +111,6 @@ try{
 
 
         });
-
-        $(".school_country").on("change",function(){
-            var value = $(this).find(":selected").attr("value");
-            $(".committee_country option").attr("selected",false);
-            $(".committee_country option[value="+value+"]").attr("selected",true);
-        });
-
 
         function show_loading(a){
             $("fieldset").attr("disabled",true);
@@ -132,7 +142,7 @@ try{
                         }else if(form.checkValidity() === true){
 
                             form.classList.remove("not-valid");
-                            $("#committee_add_form").triggerHandler("submit");
+                            $("#country_add_form").triggerHandler("submit");
 
                         }
                         form.classList.add('was-validated');

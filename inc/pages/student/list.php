@@ -81,9 +81,9 @@
                                                                     ON
                                                                       countries.id = phpauth_users.country_id
                                                                       WHERE
-                                                                      phpauth_users.school_id = {$userData["advisor_school"]} 
+                                                                      phpauth_users.school_id = '{$userData["advisor_school"]} '
                                                                       AND 
-                                                                      phpauth_users.auth = '4'
+                                                                      phpauth_users.auth = '4' ;
                                                                     
                                                                         ");
 

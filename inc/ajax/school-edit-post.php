@@ -33,41 +33,34 @@ check_login($PDO,$auth,array(0,1));
         $school_id = post("school_id");
 
         //UPDATE SCHOOL INFO
-        $PDO->prepare("UPDATE `schools` SET `school_name` = :school_name, `advisor_id` = :advisor_id,`country_id`=:country_id WHERE `id`=:id ")
+        $PDO->prepare("UPDATE `schools` SET `school_name` = :school_name, `advisor_id` = :advisor_id WHERE `id`=:id ")
             ->execute(array(
                 "school_name" => ucfirst(trim(post("school_name"))),
                 "advisor_id" => post("advisor_id"),
-                "country_id" => post("school_country_id"),
                 "id" => $school_id
 
             ));
-
-//        $PDO->prepare("UPDATE `phpauth_users` SET `country_id` = :country_id,`school_id`=:school_id WHERE `id`=:id ")
-//        ->execute(array(
-//            "country_id" => post("school_country_id"),
-//            "school_id" => $school_id,
-//            "id" => post("advisor_id")
-//        ));
 
 
         //DELETE ALL OTHER SCHOOL COMITTEE STRUCTURE
         $PDO->query("DELETE FROM `committee_structure` WHERE `school_id`='{$school_id}' ");
 
-        //INSERT ALL DATA CAME FROM EDIT FORM
-        foreach($_POST["quotas"] as $key => $value){
+        foreach($_POST["quotas"] as $key => $value) {
 
-            //IF NO QUOTA ASSIGNED FOR COMMITEE,DONT INSERT
-            if($value["quota"] > 0){
+            foreach ($value["country"] as $a => $b) {
 
-                //INSERT TO COMMITTEE STRUCTURE
-                $PDO->prepare("INSERT INTO `committee_structure` SET `committee_id` = :committee_id, `country_id` = :country_id , `school_id` = :school_id , `quota` = :quota")
-                    ->execute(array(
-                        "committee_id" => $key,
-                        "country_id" => $value["country"],
-                        "school_id" => $school_id,
-                        "quota" => $value["quota"]
-                    ));
+                if (($value["quota"][$a] > 0 && !empty($value["quota"][$a])) && (!empty($b) && $b > 0) ) {
 
+
+                    $PDO->prepare("INSERT INTO `committee_structure` SET `committee_id` = :committee_id, `country_id` = :country_id , `school_id` = :school_id , `quota` = :quota")
+                        ->execute(array(
+                            "committee_id" => $key,
+                            "country_id" => $b,
+                            "school_id" => $school_id,
+                            "quota" => $value["quota"][$a]
+                        ));
+
+                }
             }
 
         }

@@ -6,15 +6,5 @@
  * Time: 17:20
  */
 
-/*
+print_r($_POST);
 
-0 id li komitded 0 idli ülkeden 5 temsilci
-
-
- */
-$array = array(
-    array("country_id" => 1,"quantity" => 5),
-    array("country_id" => 1,"quantity" => 5)
-);
-
-echo json_encode($array,true);
