@@ -161,15 +161,15 @@
             </div>
         </div>
 
-<!--        <script>-->
-<!---->
-<!---->
-<!--            $(document).ready( function () {-->
-<!--                $('.DataTable').DataTable({-->
-<!--                    "order":[[6,"asc"]]-->
-<!--                });-->
-<!--            } );-->
-<!--        </script>-->
+        <script>
+
+
+            $(document).ready( function () {
+                $('.DataTable').DataTable({
+                    "order":[[5,"asc"]]
+                });
+            } );
+        </script>
 
     </div>
 </main>

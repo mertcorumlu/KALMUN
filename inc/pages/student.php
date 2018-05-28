@@ -17,6 +17,10 @@ switch (get("subpage")){
         include 'student/add.php';
         break;
 
+    case "ambassador":
+        include 'student/ambassador.php';
+        break;
+
     default:
         include 'student/list.php';
         break;

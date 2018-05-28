@@ -484,7 +484,7 @@ try{
                                         return 0;
                                     }
 
-                                    $("form").html("<div class=\"alert alert-success text-center\" >"+data.message+"<br><a href='/delegate/add'>Continue Adding Users</a></div>");
+                                    $("form").html("<div class=\"alert alert-success text-center\" >"+data.message+"<br><a href='/student/add'>Continue Adding Users</a></div>");
 
 
 
