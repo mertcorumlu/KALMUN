@@ -126,7 +126,13 @@ try{
 
     //EMAIL TEMPLATE PROVIDED FROM config.php
     $phpmailer->Subject = $addeditSubject;
-    $phpmailer->Body    = sprintf($addEditUserMail,@post("user_email"),@$password);
+
+    if( post("user_statue") == "3"){
+        $phpmailer->Body    = sprintf($addEditUserMailAdvisor,@post("user_email"),@$password);
+    }else{
+        $phpmailer->Body    = sprintf($addEditUserMail,@post("user_email"),@$password);
+    }
+
     $phpmailer->CharSet = 'UTF-8';
 
     //HANDLE PHPMAILER ERROR

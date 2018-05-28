@@ -25,12 +25,28 @@ try{
                           phpauth_users.`country_id`,
                           phpauth_users.`committee_id` ,
                           phpauth_users.`dt`,
-                          schools.id as advisor_school
-                          FROM `phpauth_users` 
+                          schools.id as advisor_school,
+                          schools.school_name,
+                          countries.country_name,
+                          countries.flag,
+                          committee_name
+                          FROM 
+                          `phpauth_users` 
                           LEFT JOIN
                           `schools`
                           ON
                           schools.advisor_id = phpauth_users.id
+                          OR 
+                          schools.id = phpauth_users.school_id
+                          LEFT JOIN 
+                          `countries`
+                          ON 
+                          countries.id = phpauth_users.country_id
+                          LEFT JOIN 
+                          `committees`
+                          ON 
+                          committees.id = phpauth_users.committee_id
+                          
                           WHERE phpauth_users.id = 
                           '".$auth->getCurrentUID()."';")->fetch(PDO::FETCH_ASSOC) ;
 
@@ -41,6 +57,22 @@ try{
 
           //REDIREVT ADVISORS IF NOT YET SET THEIR DELEGATES
           if(auth_level == "3"){
+
+              if(
+                  $PDO->query("SELECT
+                                    `id` 
+                                    FROM 
+                                    `schools`
+                                  WHERE
+                                    `advisor_id` = '".$userData["id"]."';")->rowCount() < 1 ){
+
+                  if(@$_GET["page"] != "notactiveted" ){
+                      include'/inc/pages/notactivated.php';
+                      exit;
+                  }
+
+              }
+
 
               if(
               $PDO->query("SELECT

@@ -59,42 +59,6 @@ try{
     <script>
         var button = $("button[type=submit]");
 
-        $("#committee_add_form").on("submit",function (e) {
-            e.preventDefault();
-
-            if(!$("#committee_add_form").hasClass("not-valid")){
-
-                $.ajax({
-                    type: "POST",
-                    url: "/inc/ajax/committee-add",
-                    data: $("#committee_add_form").serializeArray(),
-                    beforeSend:function () {
-                        show_loading(button);
-                    },
-                    error:function () {
-                        $(".alert.message").addClass("alert-danger").html("An Error Occured.Please Contact Administrator.").slideDown();
-                        hide_loading(button);
-                    },
-                    success: function (data) {
-                        hide_loading(button);
-
-                        if(data.error === true){
-                            $(".alert.message").addClass("alert-danger").html(data.message +".Please Contact Administrator.").slideDown();
-                            return 0;
-                        }
-
-                        $("form").html("<div class=\"alert alert-success text-center\" >"+data.message+"<br><a href='/committee/list'>List Committees</a></div>");
-
-
-
-                    }
-                });
-            }
-
-
-
-        });
-
         $(".school_country").on("change",function(){
             var value = $(this).find(":selected").attr("value");
             $(".committee_country option").attr("selected",false);
@@ -125,6 +89,7 @@ try{
                 // Loop over them and prevent submission
                 var validation = Array.prototype.filter.call(forms, function(form) {
                     form.addEventListener('submit', function(event) {
+                        event.preventDefault();
                         if (form.checkValidity() === false) {
                             event.preventDefault();
                             event.stopPropagation();
@@ -132,7 +97,32 @@ try{
                         }else if(form.checkValidity() === true){
 
                             form.classList.remove("not-valid");
-                            $("#committee_add_form").triggerHandler("submit");
+
+                            $.ajax({
+                                type: "POST",
+                                url: "/inc/ajax/committee-add",
+                                data: $("#committee_add_form").serializeArray(),
+                                beforeSend:function () {
+                                    show_loading(button);
+                                },
+                                error:function () {
+                                    $(".alert.message").addClass("alert-danger").html("An Error Occured.Please Contact Administrator.").slideDown();
+                                    hide_loading(button);
+                                },
+                                success: function (data) {
+                                    hide_loading(button);
+
+                                    if(data.error === true){
+                                        $(".alert.message").addClass("alert-danger").html(data.message +".Please Contact Administrator.").slideDown();
+                                        return 0;
+                                    }
+
+                                    $("form").html("<div class=\"alert alert-success text-center\" >"+data.message+"<br><a href='/committee/list'>List Committees</a></div>");
+
+
+
+                                }
+                            });
 
                         }
                         form.classList.add('was-validated');

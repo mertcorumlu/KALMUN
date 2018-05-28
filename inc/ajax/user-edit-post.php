@@ -11,7 +11,6 @@ use ZxcvbnPhp\Zxcvbn;
 include '../loader.php';
 
 if(!$_POST){
-echo 'test';
     http_response_code(400);
     exit;
 

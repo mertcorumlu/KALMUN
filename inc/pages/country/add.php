@@ -76,42 +76,6 @@ try{
             $("form input[name=country_name]").attr("value",$(this).find(":selected").html());
         });
 
-        $("#country_add_form").on("submit",function (e) {
-            e.preventDefault();
-
-            if(!$("#country_add_form").hasClass("not-valid")){
-
-                $.ajax({
-                    type: "POST",
-                    url: "/inc/ajax/country-add",
-                    data: $("#country_add_form").serializeArray(),
-                    beforeSend:function () {
-                        show_loading(button);
-                    },
-                    error:function () {
-                        $(".alert.message").addClass("alert-danger").html("An Error Occured.Please Contact Administrator.").slideDown();
-                        hide_loading(button);
-                    },
-                    success: function (data) {
-                        hide_loading(button);
-
-                        if(data.error === true){
-                            $(".alert.message").addClass("alert-danger").html(data.message +".Please Contact Administrator.").slideDown();
-                            return 0;
-                        }
-
-                        $("form").html("<div class=\"alert alert-success text-center\" >"+data.message+"<br><a href='/country/list'>List Countries</a></div>");
-
-
-
-                    }
-                });
-            }
-
-
-
-        });
-
         function show_loading(a){
             $("fieldset").attr("disabled",true);
             a.data("original-text",a.html());
@@ -135,6 +99,7 @@ try{
                 // Loop over them and prevent submission
                 var validation = Array.prototype.filter.call(forms, function(form) {
                     form.addEventListener('submit', function(event) {
+                        event.preventDefault();
                         if (form.checkValidity() === false) {
                             event.preventDefault();
                             event.stopPropagation();
@@ -142,7 +107,32 @@ try{
                         }else if(form.checkValidity() === true){
 
                             form.classList.remove("not-valid");
-                            $("#country_add_form").triggerHandler("submit");
+
+                            $.ajax({
+                                type: "POST",
+                                url: "/inc/ajax/country-add",
+                                data: $("#country_add_form").serializeArray(),
+                                beforeSend:function () {
+                                    show_loading(button);
+                                },
+                                error:function () {
+                                    $(".alert.message").addClass("alert-danger").html("An Error Occured.Please Contact Administrator.").slideDown();
+                                    hide_loading(button);
+                                },
+                                success: function (data) {
+                                    hide_loading(button);
+
+                                    if(data.error === true){
+                                        $(".alert.message").addClass("alert-danger").html(data.message +".Please Contact Administrator.").slideDown();
+                                        return 0;
+                                    }
+
+                                    $("form").html("<div class=\"alert alert-success text-center\" >"+data.message+"<br><a href='/country/list'>List Countries</a></div>");
+
+
+
+                                }
+                            });
 
                         }
                         form.classList.add('was-validated');

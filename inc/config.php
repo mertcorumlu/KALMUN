@@ -100,5 +100,18 @@ Password : <strong>%s</strong><br><br>
 <p>You can change your password from system anytime.</p>
 ";
 
+$addEditUserMailAdvisor = "
+Dear MUN-Director, 
+<br><br>
+You may start enrolling your delegates to the K@LMUN system. The information you share regarding your students will allow us to arrange badges and certificates. Please enroll your students very carefully and accordingly to their academic competency. We also ask you to choose one ambassador for each of the delegations we assigned you in the General Assembly. Only GA participants can be ambassadors. 
+<br><br>
+Your email: <strong>%s</strong><br>
+Your password: <strong>%s</strong>
+<br><br>
+<p>Please complete this form in 10 days latest. We wish you the best at your work. </p>
+Cordially,<br> 
+KALMUN Secretariat
+";
+
 
 

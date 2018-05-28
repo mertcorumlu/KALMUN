@@ -292,42 +292,6 @@ try{
     <script>
         var button = $("button[type=submit]");
 
-        $("#user_ad_form").submit(function (e) {
-            e.preventDefault();
-
-            if(!$("#user_ad_form").hasClass("not-valid")){
-
-                $.ajax({
-                    type: "POST",
-                    url: "/inc/ajax/user-add",
-                    data: $("#user_ad_form").serializeArray(),
-                    beforeSend:function () {
-                        show_loading(button);
-                    },
-                    error:function () {
-                        $(".alert.message").addClass("alert-danger").html("An Error Occured.Please Contact Administrator.").slideDown();
-                        hide_loading(button);
-                    },
-                    success: function (data) {
-                        hide_loading(button);
-
-                        if(data.error === true){
-                            $(".alert.message").addClass("alert-danger").html(data.message +".Please Contact Administrator.").slideDown();
-                            return 0;
-                        }
-
-                        $("form").html("<div class=\"alert alert-success text-center\" >"+data.message+"<br><a href='/users/list'>List Users</a></div>");
-
-
-
-                    }
-                });
-            }
-
-
-
-        });
-
         $("#selectStatue").bind("change",function () {
 
             $("#setIndividual").attr("disabled",true);
@@ -382,6 +346,7 @@ try{
                 // Loop over them and prevent submission
                 var validation = Array.prototype.filter.call(forms, function(form) {
                     form.addEventListener('submit', function(event) {
+                        event.preventDefault();
                         if (form.checkValidity() === false) {
                             event.preventDefault();
                             event.stopPropagation();
@@ -389,7 +354,32 @@ try{
                         }else if(form.checkValidity() === true){
 
                             form.classList.remove("not-valid");
-                            $("#user_ad_form").triggerHandler("submit");
+
+                            $.ajax({
+                                type: "POST",
+                                url: "/inc/ajax/user-add",
+                                data: $("#user_ad_form").serializeArray(),
+                                beforeSend:function () {
+                                    show_loading(button);
+                                },
+                                error:function () {
+                                    $(".alert.message").addClass("alert-danger").html("An Error Occured.Please Contact Administrator.").slideDown();
+                                    hide_loading(button);
+                                },
+                                success: function (data) {
+                                    hide_loading(button);
+
+                                    if(data.error === true){
+                                        $(".alert.message").addClass("alert-danger").html(data.message +".Please Contact Administrator.").slideDown();
+                                        return 0;
+                                    }
+
+                                    $("form").html("<div class=\"alert alert-success text-center\" >"+data.message+"<br><a href='/users/list'>List Users</a></div>");
+
+
+
+                                }
+                            });
 
                         }
                         form.classList.add('was-validated');

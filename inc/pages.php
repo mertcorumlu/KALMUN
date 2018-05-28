@@ -85,6 +85,15 @@ switch(get("page")){
         $auth_levels = array(3);
         break;
 
+    case "profile":
+        $title = "Profile";
+        $include_page = "profile";
+        $head = "<style>input[type=text]{text-transform: capitalize}</style>
+                 <link rel='stylesheet' href='/inc/css/popup.css'>";
+        $footer = "<script src=\"/inc/js/popup.js\"></script>";
+        $auth_levels = array(0,1,2,3,4);
+        break;
+
     case "login":
         $include_page = "login";
         if($auth->isLogged()){
