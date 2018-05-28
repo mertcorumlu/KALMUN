@@ -10,7 +10,7 @@ include '../loader.php';
 
 if(empty(post("school_name")) || empty(post("advisor_id")) || empty($_POST["quotas"])){
 
-    http_response_code(404);
+    http_response_code(400);
     exit;
     
 }
@@ -25,7 +25,7 @@ $return = array(
 
 try{
 
-    $PDO->query("START TRANSACTION");
+    $PDO->beginTransaction();
 
     $PDO->prepare("INSERT INTO `schools` SET `school_name` = :school_name, `advisor_id` = :advisor_id")
         ->execute(array(
@@ -64,7 +64,7 @@ try{
         "error" => false,
         "message" => "School Succesfully Added."
     );
-    $PDO->query("COMMIT;");
+    $PDO->commit();
     return_error($return);
 
 
@@ -75,7 +75,7 @@ try{
         "message" => $e->errorInfo[2]
     );
 
-    $PDO->query("ROLLBACK;");
+    $PDO->rollback();
     return_error($return);
     
 }

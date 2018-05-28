@@ -1,6 +1,6 @@
 <?php
 //404 RESPONSE
-http_response_code(404);
+http_response_code(400);
 ?>
 <!DOCTYPE html>
 <html>

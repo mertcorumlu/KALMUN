@@ -224,6 +224,7 @@ var BFHCountriesList = {
   'ZA': 'South Africa',
   'GS': 'South Georgia and the South Sandwich Islands',
   'KR': 'South Korea',
+  'SS': 'South Sudan',
   'ES': 'Spain',
   'LK': 'Sri Lanka',
   'SD': 'Sudan',

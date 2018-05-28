@@ -11,7 +11,7 @@ include '../loader.php';
 
 //CHECK IF REQUEST TRUE
 if(empty(post("committee_name")) || empty(post("committee_id")) ){
-    http_response_code(404);
+    http_response_code(400);
     exit;
 }
 
@@ -28,7 +28,7 @@ $return = array(
 try{
 
     //START TRANSACTION
-    $PDO->query("START TRANSACTION");
+    $PDO->beginTransaction();
 
     $committee_id = post("committee_id");
 
@@ -46,7 +46,7 @@ try{
         "error" => false,
         "message" => "Committee Succesfully Edited."
     );
-    $PDO->query("COMMIT;");
+    $PDO->commit();
     return_error($return);
 
 
@@ -57,7 +57,7 @@ try{
         "error" => true,
         "message" => $e->errorInfo[2]
     );
-    $PDO->query("ROLLBACK;");
+    $PDO->rollback();
     return_error($return);
 
 }

@@ -11,7 +11,7 @@ include '../loader.php';
 
 //CHECK IF REQUEST TRUE
 if(empty(post("country_name")) || empty(post("country_iso")) || empty(post("country_id")) ){
-    http_response_code(404);
+    http_response_code(400);
     exit;
 }
 
@@ -28,7 +28,7 @@ $return = array(
 try{
 
     //START TRANSACTION
-    $PDO->query("START TRANSACTION");
+    $PDO->beginTransaction();
 
     $country_id = post("country_id");
 
@@ -47,7 +47,7 @@ try{
         "error" => false,
         "message" => "Country Succesfully Edited."
     );
-    $PDO->query("COMMIT;");
+    $PDO->commit();
     return_error($return);
 
 
@@ -58,7 +58,7 @@ try{
         "error" => true,
         "message" => $e->errorInfo[2]
     );
-    $PDO->query("ROLLBACK;");
+    $PDO->rollback();
     return_error($return);
 
 }

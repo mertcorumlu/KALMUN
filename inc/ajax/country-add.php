@@ -10,7 +10,7 @@ include '../loader.php';
 
 if(empty(post("country_name")) || empty(post("country_iso"))){
 
-    http_response_code(404);
+    http_response_code(400);
     exit;
 
 }
@@ -25,7 +25,7 @@ $return = array(
 
 try{
 
-    $PDO->query("START TRANSACTION");
+    $PDO->beginTransaction();
 
     $PDO->prepare("INSERT INTO `countries` SET `country_name` = :country_name , `flag` = :country_iso")
         ->execute(array(
@@ -38,7 +38,7 @@ try{
         "error" => false,
         "message" => "Country Succesfully Added."
     );
-    $PDO->query("COMMIT;");
+    $PDO->commit();
     return_error($return);
 
 
@@ -48,7 +48,7 @@ try{
         "error" => true,
         "message" => $e->getMessage()
     );
-    $PDO->query("ROLLBACK;");
+    $PDO->rollback();
     return_error($return);
 
 }

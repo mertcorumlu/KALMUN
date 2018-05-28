@@ -10,7 +10,7 @@ include '../loader.php';
 
 if(!$_POST){
 
-    http_response_code(404);
+    http_response_code(400);
     exit;
 
 }
@@ -25,7 +25,7 @@ $return = array(
 try{
 
 
-    $PDO->query("START TRANSACTION");
+    $PDO->beginTransaction();
 
     $insertArray = array();
 
@@ -101,7 +101,7 @@ try{
 
     //HANDLE REGISTER ERRORS
     if($return["error"]==true){
-        $PDO->query("ROLLBACK;");
+        $PDO->rollback();
         return_error($return);
     }
 
@@ -142,7 +142,7 @@ try{
      * MAIL
      */
 
-    $PDO->query("COMMIT;");
+    $PDO->commit();
     $return = array(
         "error" => false,
         "message" => "User sucessfully created.Email Sent"
@@ -156,7 +156,7 @@ try{
         "error" => true,
         "message" => $e->errorInfo[2]
     );
-    $PDO->query("ROLLBACK;");
+    $PDO->rollback();
     return_error($return);
 
 } catch (Exception $e) {
@@ -165,6 +165,6 @@ try{
         "error" => true,
         "message" => $e->getMessage()
     );
-    $PDO->query("ROLLBACK;");
+    $PDO->rollback();
     return_error($return);
 }

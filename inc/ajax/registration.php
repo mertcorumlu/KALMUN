@@ -11,7 +11,7 @@ include("../loader.php");
 
 
 if(!$_POST){
-    http_response_code(404);
+    http_response_code(400);
 }
 
 
@@ -51,7 +51,7 @@ if(!$_POST){
             if($query->rowCount() >= 1){
                 $return["error"] = true;
                 $return["message"] = "You have already applied with this email.";
-                $PDO->query("ROLLBACK;");
+                $PDO->rollback();
                 return_error($return);
             }
 
@@ -94,7 +94,7 @@ if(!$_POST){
             //HANDLE SQL ERRORS
             $return["error"] = true;
             $return["message"] = $e->errorInfo[2];
-            $PDO->query("ROLLBACK;");
+            $PDO->rollback();
             return_error($return);
         }
 
@@ -121,7 +121,7 @@ if(!$_POST){
             if($query->rowCount() >= 1){
                 $return["error"] = true;
                 $return["message"] = "You have already applied with this email.";
-                $PDO->query("ROLLBACK;");
+                $PDO->rollback();
                 return_error($return);
             }
 
@@ -164,7 +164,7 @@ if(!$_POST){
         }catch (PDOException $e){
             $return["error"] = true;
             $return["message"] = $e->errorInfo[2];
-            $PDO->query("ROLLBACK;");
+            $PDO->rollback();
             return_error($return);
         }
 

@@ -12,7 +12,7 @@ include '../loader.php';
 
 if(!$_POST){
 echo 'test';
-    http_response_code(404);
+    http_response_code(400);
     exit;
 
 }
@@ -29,7 +29,7 @@ $userId = post("user_id");
 
 try{
 
-    $PDO->query("START TRANSACTION");
+    $PDO->beginTransaction();
 
     if(post("user_old_statue") == "3" && post("user_old_statue") != post("user_statue")){
 
@@ -38,7 +38,7 @@ try{
                 "error" => true,
                 "message" => "This Advisor Has Assigned To A School.Please Reassign Advisors School."
             );
-            $PDO->query("ROLLBACK;");
+            $PDO->rollback();
             return_error($return);
         }
 
@@ -121,7 +121,7 @@ try{
                 "error" => true,
                 "message" => "Password Is Too Weak."
             );
-            $PDO->query("ROLLBACK;");
+            $PDO->rollback();
             return_error($return);
 
         }
@@ -182,7 +182,7 @@ try{
      */
 
 
-    $PDO->query("COMMIT;");
+    $PDO->commit();
 
     $return = array(
         "error" => false,
@@ -196,7 +196,7 @@ try{
         "error" => true,
         "message" => $e->getMessage()
     );
-    $PDO->query("ROLLBACK;");
+    $PDO->rollback();
     return_error($return);
 
 } catch (Exception $e) {
@@ -205,6 +205,6 @@ try{
         "error" => true,
         "message" => $e->getMessage()
     );
-    $PDO->query("ROLLBACK;");
+    $PDO->rollback();
     return_error($return);
 }

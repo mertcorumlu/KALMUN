@@ -11,7 +11,7 @@ include '../loader.php';
 
 //CHECK PHP REQUEST
 if(empty(get("id"))){
-    http_response_code(404);
+    http_response_code(400);
     exit;
 }
 

@@ -11,7 +11,7 @@ include("../loader.php");
 
 //CHECK IF REQUEST IS WORNG
 if(get("id")== "" || get("value")== ""){
-    http_response_code(404);
+    http_response_code(400);
     exit;
 }
 
@@ -36,7 +36,7 @@ try {
         $return["id"] = $id;
 
         //START SQL TRANSACTION
-        $PDO->query("START TRANSACTION");
+        $PDO->beginTransaction();
 
         //UPDATE APPLICATION STATE
         $PDO->query("UPDATE `applications` SET `status`='{$value}' WHERE `id`='{$id}' ");

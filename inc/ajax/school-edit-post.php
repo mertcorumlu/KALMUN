@@ -11,7 +11,7 @@ include '../loader.php';
 
 //CHECK IF REQUEST TRUE
     if(empty(post("school_name")) || empty(post("advisor_id")) || empty($_POST["quotas"])){
-        http_response_code(404);
+        http_response_code(400);
         exit;
     }
 
@@ -28,7 +28,7 @@ check_login($PDO,$auth,array(0,1));
     try{
 
         //START TRANSACTION
-        $PDO->query("START TRANSACTION");
+        $PDO->beginTransaction();
 
         $school_id = post("school_id");
 
@@ -70,7 +70,7 @@ check_login($PDO,$auth,array(0,1));
             "error" => false,
             "message" => "School Succesfully Edited."
         );
-        $PDO->query("COMMIT;");
+        $PDO->commit();
         return_error($return);
 
 
@@ -81,7 +81,7 @@ check_login($PDO,$auth,array(0,1));
             "error" => true,
             "message" => $e->errorInfo[2]
         );
-        $PDO->query("ROLLBACK;");
+        $PDO->rollback();
         return_error($return);
 
     }

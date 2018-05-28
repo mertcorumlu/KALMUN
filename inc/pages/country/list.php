@@ -23,13 +23,14 @@
                                 vertical-align: middle;
                             }
                         </style>
-                        <table class="DataTable table table-striped table-bordered dataTable no-footer" cellspacing="0" cellpadding="0">
+                        <table class="DataTable table table-striped table-bordered dataTable no-footer " cellspacing="0" cellpadding="0">
                             <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Country Name</th>
                                 <th>Flag / ISO Code</th>
                                 <th>Action</th>
+                                <th></th>
 
                             </tr>
                             </thead>
@@ -68,6 +69,10 @@
                                             <button type="button" class="btn btn-primary" onclick="open_popup('/inc/ajax/country-edit?id=<?=$data["id"]?>')">Edit</button>
                                         </td>
 
+                                        <td>
+                                            <button type="button" class="btn btn-danger delete-button" data-type="country" data-id="<?=$data["id"]?>" >Delete</button>
+                                        </td>
+
 
 
                                     </tr>
@@ -92,15 +97,15 @@
             </div>
         </div>
 
-<!--        <script>-->
-<!---->
-<!---->
-<!--            // $(document).ready( function () {-->
-<!--            //     // $('.DataTable').DataTable({-->
-<!--            //     //     "order":[[0,"asc"]]-->
-<!--            //     // });-->
-<!--            // } );-->
-<!--        </script>-->
+        <script>
+
+
+            $(document).ready( function () {
+                $('.DataTable').DataTable({
+                    "order":[[1,"asc"]]
+                });
+            } );
+        </script>
 
     </div>
 </main>

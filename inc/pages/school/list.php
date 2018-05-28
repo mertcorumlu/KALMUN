@@ -23,7 +23,7 @@
                                 vertical-align: middle;
                             }
                         </style>
-                        <table class="DataTable table table-striped table-bordered dataTable no-footer" cellspacing="0" cellpadding="0">
+                        <table class="DataTable table table-striped table-bordered dataTable no-footer display responsive no-wrap" cellspacing="0" cellpadding="0">
                             <thead>
                             <tr>
                                 <th>ID</th>
@@ -31,6 +31,7 @@
                                 <th>Advisor</th>
                                 <th>Structure</th>
                                 <th>Action</th>
+                                <th></th>
 
                             </tr>
                             </thead>
@@ -113,6 +114,10 @@
 
                                         <td>
                                             <button type="button" class="btn btn-primary" onclick="open_popup('/inc/ajax/school-edit?id=<?=$data["school_id"]?>')">Edit</button>
+                                        </td>
+
+                                        <td>
+                                            <button type="button" class="btn btn-danger delete-button" data-type="school" data-id="<?=$data["school_id"]?>" >Delete</button>
                                         </td>
 
 

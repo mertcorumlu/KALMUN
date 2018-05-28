@@ -51,7 +51,7 @@ try{
                                 vertical-align: middle;
                             }
                         </style>
-                        <table class="DataTable table table-striped table-bordered dataTable no-footer" cellspacing="0" cellpadding="0">
+                        <table class="DataTable table table-striped table-bordered dataTable no-footer display responsive no-wrap" cellspacing="0" cellpadding="0">
                             <thead>
 
                             <tr>
@@ -65,6 +65,7 @@ try{
                                 <th>Representing Country</th>
                                 <th>Committee</th>
                                 <th>Action</th>
+                                <th></th>
 
                             </tr>
 
@@ -162,6 +163,9 @@ try{
                                         <td><?=$data["committee_name"]?></td>
                                         <td>
                                             <button type="button" class="btn btn-primary" onclick="open_popup('/inc/ajax/user-edit?id=<?=$data["id"]?>')">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger delete-button" data-type="user" data-id="<?=$data["id"]?>" >Delete</button>
                                         </td>
 
 

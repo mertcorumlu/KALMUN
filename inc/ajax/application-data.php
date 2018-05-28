@@ -11,7 +11,7 @@ include("../loader.php");
 
 //IF REQUEST FALSE RETURN 404
 if(get("id")==""){
-    http_response_code(404);
+    http_response_code(400);
     exit;
 }
 

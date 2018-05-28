@@ -34,7 +34,7 @@
                             }
 
                         </style>
-                        <table class="table table-striped table-bordered dataTable no-footer static-applications" cellspacing="5" cellpadding="0">
+                        <table class="table table-striped table-bordered dataTable no-footer display responsive no-wrap static-applications" cellspacing="5" cellpadding="0">
                             <thead>
                             </thead>
                             <tbody>
@@ -105,7 +105,7 @@
 
                 <div class="col-md-12" style="padding:0;">
                     <div class="bgc-white bd bdrs-3 p-20 mB-20">
-                        <table class="DataTable table table-striped table-bordered dataTable no-footer" cellspacing="0" cellpadding="0">
+                        <table class="DataTable table table-striped table-bordered dataTable no-footer display responsive no-wrap" cellspacing="0" cellpadding="0">
                             <thead>
                             <tr>
                                 <th>Type</th>
@@ -117,6 +117,7 @@
                                 <th>Telephone</th>
                                 <th>Application Date</th>
                                 <th>Action</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -142,6 +143,9 @@
 
                                     <td>
                                         <button type="button" class="btn btn-primary" onclick="open_popup('/inc/ajax/application-data?id=<?=$data["id"]?>')"><?php echo $data["status"] == 1 ? "View" : "Evaluate" ?></button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger delete-button" data-type="application" data-id="<?=$data["id"]?>" >Delete</button>
                                     </td>
 
 

@@ -43846,3 +43846,7 @@ footer {
 
 /*# sourceMappingURL=stylesheet.css.map */
 
+button.delete-button{
+  float:left;
+}
+

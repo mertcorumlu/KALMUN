@@ -24,8 +24,13 @@
 <script src="/inc/js/javascript.js"></script>
 <script type="text/javascript" src="/inc/js/sidebar.js"></script>
 <script src="/inc/js/bootstrap-formhelpers.min.js"></script>
-<script type="text/javascript" src="/inc/js/datatables.min.js"></script>
-<script src="/inc/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" src="/inc/css/DataTables-1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/inc/css/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" src="/inc/css/Responsive-2.2.1/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" src="/inc/css/Responsive-2.2.1/js/responsive.bootstrap4.min.js"></script>
+
+
+
 
 <?=$footer."\n"?>
 

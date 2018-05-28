@@ -10,7 +10,7 @@ include '../loader.php';
 
 if(empty(post("committee_name"))){
 
-    http_response_code(404);
+    http_response_code(400);
     exit;
 
 }
@@ -25,7 +25,7 @@ $return = array(
 
 try{
 
-    $PDO->query("START TRANSACTION");
+    $PDO->beginTransaction();
 
     $PDO->prepare("INSERT INTO `committees` SET `committee_name` = :committee_name")
         ->execute(array(
@@ -39,7 +39,7 @@ try{
         "error" => false,
         "message" => "Committee Succesfully Added."
     );
-    $PDO->query("COMMIT;");
+    $PDO->commit();
     return_error($return);
 
 
@@ -49,7 +49,7 @@ try{
         "error" => true,
         "message" => $e->errorInfo[2]
     );
-    $PDO->query("ROLLBACK;");
+    $PDO->rollback();
     return_error($return);
 
 }
