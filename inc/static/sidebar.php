@@ -149,6 +149,15 @@
 
                 </li>
 
+                <li class="nav-item">
+                    <a class="sidebar-link" href="/applications">
+                <span class="icon-holder">
+                  <i class="c-blue-500 fa fa-cog"></i>
+                </span>
+                        <span class="title">Options</span>
+                    </a>
+                </li>
+
                 <?php
             }
             ?>
@@ -173,6 +182,9 @@
                             </li>
                             <li>
                                 <a class="sidebar-link" href="/student/add">Add New Student</a>
+                            </li>
+                            <li>
+                                <a class="sidebar-link" href="/student/ambassador">Choose Ambassador</a>
                             </li>
 
                         </ul>

@@ -22,9 +22,11 @@ http_response_code(403);
         <h3 class='mB-10 fsz-lg c-grey-900 tt-c'>Oops Your Account Is Not Activated.</h3>
         <p class='mB-30 fsz-def c-grey-700'>It Looks Like Your Account Is Not Activated Yet. Please Contact Our Team At info@kalmun.org</p>
         <div>
-            <a href="javascript:window.history.back();" type='primary' class='btn btn-primary'>Go Back</a>
+            <a href="javascript:logout();" type='primary' class='btn btn-primary'>Logout</a>
         </div>
     </div>
 </div>
 </body>
+<script src="/inc/js/jquery-3.3.1.min.js"></script>
+<script src="/inc/js/javascript.js"></script>
 </html>

@@ -72,14 +72,15 @@ try{
                                                 <span class="text-danger">*</span></strong></label>
 
                                         <div class="col-sm-4">
-                                            <select class="form-control" name="user_name" required>
+                                            <select class="form-control" name="user_name[]" required>
                                                 <option value="">Please Select...</option>
                                                 <?php
                                                 $ambs = $PDO->query("
                                                 SELECT
                                                 id,
                                                 name,
-                                                surname
+                                                surname,
+                                                is_amb
                                                 FROM
                                                 `phpauth_users`
                                                 WHERE
@@ -90,9 +91,8 @@ try{
 
                                                 while($ambsData = $ambs->fetch(PDO::FETCH_ASSOC)){
 
-
                                                 ?>
-                                                    <option value="<?=$ambsData["id"]?>"><?=$ambsData["name"]." ".$ambsData["surname"]?></option>
+                                                    <option value="<?=$ambsData["id"]?>" <?=($ambsData["is_amb"] == "1" ? "selected" : "")?>><?=$ambsData["name"]." ".$ambsData["surname"]?></option>
                                                 <?php
                                                }
                                                 ?>
@@ -177,7 +177,7 @@ try{
                                         return 0;
                                     }
 
-                                    $("form").html("<div class=\"alert alert-success text-center\" >"+data.message+"<br><a href='/country/list'>List Countries</a></div>");
+                                    $("form").html("<div class=\"alert alert-success text-center\" >"+data.message+"<br><a href='/student/list'>List Students</a></div>");
 
 
 

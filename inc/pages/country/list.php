@@ -23,7 +23,7 @@
                                 vertical-align: middle;
                             }
                         </style>
-                        <table class="DataTable table table-striped table-bordered dataTable no-footer " cellspacing="0" cellpadding="0">
+                        <table class="DataTable table table-striped table-bordered dataTable no-footer display responsive no-wrap" cellspacing="0" cellpadding="0">
                             <thead>
                             <tr>
                                 <th>ID</th>
@@ -60,7 +60,7 @@
                                     <tr>
                                         <td><strong><?=$data["id"]?></strong></td>
                                         <td><?=$data["country_name"]?></td>
-                                        <td><div class=" <?=$data["flag"] != "" ? "flag flag-".strtolower($data["flag"]) :"" ?>" style="vertical-align: middle"></div><?=$data["flag"]?></td>
+                                        <td><div class=" <?=$data["flag"] != "" ? "flag flag-".strtolower($data["flag"]) :"" ?>" style="vertical-align: middle"></div> <?=$data["flag"]?></td>
 
 
 

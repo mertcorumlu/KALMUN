@@ -159,7 +159,7 @@ try{
                                         </td>
                                         <td><?=$data["email"]?></td>
                                         <td><?=$data["telephone"]?></td>
-                                        <td><div class=" <?=$data["flag"] != "" ? "flag flag-".strtolower($data["flag"]) :"" ?>" style="vertical-align: middle"></div><?=$data["country_name"]?></td>
+                                        <td><div class=" <?=$data["flag"] != "" ? "flag flag-".strtolower($data["flag"]) :"" ?>" style="vertical-align: middle"></div> <?=$data["country_name"]?></td>
                                         <td><?=$data["committee_name"]?></td>
                                         <td>
                                             <button type="button" class="btn btn-primary" onclick="open_popup('/inc/ajax/user-edit?id=<?=$data["id"]?>')">Edit</button>

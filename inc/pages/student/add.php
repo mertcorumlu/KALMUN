@@ -211,6 +211,8 @@ try{
                                 </div>
                             </div>
 
+
+
                             <?php
                             if ($countTotal == 0 ){
                                 echo "<hr>
@@ -221,6 +223,26 @@ try{
                                         
 </script>
                                     <div class=\"alert alert-success\">You have added all your students.You can edit them from students/list section </div><br>";
+
+                                if(
+                                    $PDO->query("SELECT
+                                    id
+                                    FROM 
+                                    `phpauth_users`
+                                  WHERE
+                                    `school_id` = '".$userData["advisor_school"]."' 
+                                    AND
+                                    is_amb = 1
+                                    ")->rowCount() < 1 ){
+
+
+                                    if( !(@$_GET["page"] == "student" && @$_GET["subpage"] == "ambassador")  ){
+                                        echo '<script>location.replace("/student/ambassador")</script>';
+                                        exit;
+                                    }
+
+                                }
+
 
                             }
 

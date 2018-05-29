@@ -67,12 +67,11 @@ try{
                                     `advisor_id` = '".$userData["id"]."';")->rowCount() < 1 ){
 
                   if(@$_GET["page"] != "notactiveted" ){
-                      include'/inc/pages/notactivated.php';
+                      include'pages/notactivated.php';
                       exit;
                   }
 
               }
-
 
               if(
               $PDO->query("SELECT
@@ -80,38 +79,26 @@ try{
                                     FROM 
                                     `phpauth_users`
                                   WHERE
-                                    `school_id` = '".$userData["advisor_school"]."';")->rowCount() < 1 ){
+                                    `school_id` = '".$userData["advisor_school"]."'")->rowCount()
+
+                                        <
+
+              $PDO->query("SELECT
+                                    SUM(quota) as toplam
+                                    FROM 
+                                    `committee_structure`
+                                  WHERE
+                                    `school_id` = '".$userData["advisor_school"]."'")->fetch(PDO::FETCH_ASSOC)["toplam"]
+              ){
 										
 									
 
-                  if(@$_GET["page"] != "student" && @$_GET["subpage"] != "add"  ){
+                  if( !(@$_GET["page"] == "student" && (@$_GET["subpage"] == "add"|| @$_GET["subpage"] =="list") )  ){
                       echo '<script>location.replace("/student/add")</script>';
                       exit;
                   }
 
               }
-
-
-              if(
-                  $PDO->query("SELECT
-                                    id
-                                    FROM 
-                                    `phpauth_users`
-                                  WHERE
-                                    `school_id` = '".$userData["advisor_school"]."' 
-                                    AND
-                                    is_amb = 1
-                                    ;")->rowCount() < 1 ){
-
-
-
-                  if(@$_GET["page"] != "student" && @$_GET["subpage"] != "ambassador"  ){
-                      echo '<script>location.replace("/student/ambassador")</script>';
-                      exit;
-                  }
-
-              }
-
 
 
 

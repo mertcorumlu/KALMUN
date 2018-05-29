@@ -59,6 +59,7 @@
                                                                       phpauth_users.telephone,
                                                                       phpauth_users.auth,
                                                                       phpauth_users.isactive,
+                                                                      phpauth_users.is_amb,
                                                                       countries.country_name,
                                                                       countries.flag,
                                                                       committees.committee_name,
@@ -124,6 +125,8 @@
 
 
                                                 }
+
+                                                echo ($data["is_amb"] == "1" ? "<i class=\"fa fa-star text-warning ambassador\" data-toggle=\"tooltip\" title=\"Ambassador\" ></i>" : "");
                                                 ?>
                                             </strong>
                                         </td>
@@ -131,7 +134,7 @@
                                         <td><?=$data["name"]?></td>
                                         <td><?=$data["email"]?></td>
                                         <td><?=$data["telephone"]?></td>
-                                        <td><div class=" <?=$data["flag"] != "" ? "flag flag-".strtolower($data["flag"]) :"" ?>" style="vertical-align: middle"></div><?=$data["country_name"]?></td>
+                                        <td><div class=" <?=$data["flag"] != "" ? "flag flag-".strtolower($data["flag"]) :"" ?>" style="vertical-align: middle"></div> <?=$data["country_name"]?></td>
                                         <td><strong><?=$data["committee_name"]?></strong></td>
                                         <td>
                                             <button type="button" class="btn btn-primary" onclick="open_popup('/inc/ajax/student-edit?id=<?=$data["id"]?>')">Edit</button>
@@ -168,6 +171,7 @@
                 $('.DataTable').DataTable({
                     "order":[[5,"asc"]]
                 });
+                $('[data-toggle="tooltip"]').tooltip();
             } );
         </script>
 
