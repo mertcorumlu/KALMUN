@@ -259,7 +259,7 @@ try{
                                     <label for="" class="col-sm-2 col-form-label"><strong>Committee <span class="text-danger">*</span></strong></label>
 
                                     <div class="col-sm-4">
-                                        <select id="setCommittee" class="form-control school_country" name="user_committee_id" required <?php echo $userData["auth"] == "4" ? "" : "disabled" ?>>
+                                        <select id="setCommittee" class="form-control school_country" name="user_committee_id" required <?php echo ($userData["auth"] ==  "4" || $userData["auth"] ==   "2" )  ? "" : "disabled" ?>>
                                             <option value="">Please Select...</option>
                                             <?php
 

@@ -16,7 +16,7 @@
                                 </div>
                             </div>
                             <div class="peer peer-greed">
-                                <h5 class="lh-1 mB-0 logo-text">K@LMUN</h5>
+                                <h5 class="lh-1 mB-0 logo-text" style="color:#72777a;text-align: center">K@LMUN</h5>
                             </div>
                         </div>
                     </a>
@@ -149,6 +149,38 @@
 
                 </li>
 
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle" href="javascript:void(0);">
+                <span class="icon-holder">
+                    <i class="c-blue-500 fa fa-book"></i>
+                  </span>
+                        <span class="title">Sessions</span>
+
+                        <span class="arrow">
+                    <i class="ti-angle-right"></i>
+                  </span>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="sidebar-link" href="/sessions/list">List Sessions</a>
+                            </li>
+                            <li>
+                                <a class="sidebar-link" href="/sessions/add">Add New Session</a>
+                            </li>
+
+                        </ul>
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+                    <a class="sidebar-link" href="/files">
+                <span class="icon-holder">
+                  <i class="c-blue-500 fa fa-file"></i>
+                </span>
+                        <span class="title">Files</span>
+                    </a>
+                </li>
+
                 <li class="nav-item">
                     <a class="sidebar-link" href="/applications">
                 <span class="icon-holder">
@@ -156,6 +188,52 @@
                 </span>
                         <span class="title">Options</span>
                     </a>
+                </li>
+
+                <?php
+            }
+            ?>
+
+            <?php
+            if(is_authorized(auth_level,array(2))) {
+                ?>
+
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle" href="javascript:void(0);">
+                <span class="icon-holder">
+                    <i class="c-blue-500 fa fa-file"></i>
+                  </span>
+                        <span class="title">Files</span>
+
+                        <span class="arrow">
+                    <i class="ti-angle-right"></i>
+                  </span>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="sidebar-link" href="/files/list">List Your Files</a>
+                            </li>
+                            <li>
+                                <a class="sidebar-link" href="/files/add">Add New File</a>
+                            </li>
+
+                            <?php
+                            if( $userData["committee_id"] == $auth->config->ga1_id ||
+                                $userData["committee_id"] == $auth->config->ga3_id ||
+                                $userData["committee_id"] == $auth->config->ga4_id ||
+                                $userData["committee_id"] == $auth->config->ga6_id ){
+                            ?>
+                            <li>
+                                <a class="sidebar-link" href="/files/plenary-session-resolution">Choose Plenary Session Resolution</a>
+                            </li>
+
+                            <?php
+                            }
+                            ?>
+
+
+                        </ul>
+                    </a>
+
                 </li>
 
                 <?php
@@ -195,6 +273,8 @@
                 <?php
             }
             ?>
+
+
 
 
 

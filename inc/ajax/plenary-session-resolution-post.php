@@ -10,13 +10,14 @@
 include '../loader.php';
 
 //CHECK IF REQUEST TRUE
-if(empty($_POST["user_id"]) ){
+if(empty($_POST["id"]) ){
+    echo 'test';
     http_response_code(400);
     exit;
 }
 
 //CHECK IF USER LOGGED IN,OR IS AUTHORIZED
-check_login($PDO,$auth,array(3));
+check_login($PDO,$auth,array(2));
 
 $return = array(
     "error" => true,
@@ -30,54 +31,46 @@ try{
     $userData = $PDO->query("
                           SELECT 
                           phpauth_users.`id`,
-                          schools.id as advisor_school
+                          phpauth_users.committee_id
                           FROM 
                           `phpauth_users` 
-                          LEFT JOIN
-                          `schools`
-                          ON
-                          schools.advisor_id = phpauth_users.id
-                          OR 
-                          schools.id = phpauth_users.school_id
                           WHERE 
                           phpauth_users.id = '".$auth->getCurrentUID()."'")
-                                                     ->fetch(PDO::FETCH_ASSOC) ;
+        ->fetch(PDO::FETCH_ASSOC) ;
 
 
     $PDO->query("
                 UPDATE
-                `phpauth_users`
+                `files`
                 SET
-                is_amb = 0
+                is_reso = 0
                 WHERE
-                school_id = {$userData["advisor_school"]}
-                AND 
-                auth = 4
+                committee_id = '{$userData["committee_id"]}'
                 
         ");
 
 
 
-    foreach ($_POST["user_id"] as $value ){
 
-    $PDO->query("
+
+        $PDO->query("
                     UPDATE
-                    `phpauth_users`
+                    `files`
                     SET
-                    is_amb = 1
+                    is_reso = 1
                     WHERE
-                    auth = 4
+                    status = 5
                     AND
-                    school_id = {$userData["advisor_school"]}
+                    committee_id = '{$userData["committee_id"]}'
                     AND
-                    id =({$value}) 
+                    id = '{$_POST["id"]}'
     ");
 
-    }
+
 
     $return = array(
         "error" => false,
-        "message" => "Ambassador(s) Sucessfuly Selected"
+        "message" => "Resolution Sucessfuly Selected"
     );
 
     $PDO->commit();

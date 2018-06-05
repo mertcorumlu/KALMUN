@@ -47,13 +47,13 @@ try{
                                     school_id = {$userData["advisor_school"]} 
                                     AND
                                     (
-                                    committee_id = 1
+                                    committee_id = '{$auth->config->ga1_id}'
                                     OR
-                                    committee_id = 2
+                                    committee_id = '{$auth->config->ga3_id}'
                                     OR
-                                    committee_id = 3
+                                    committee_id = '{$auth->config->ga4_id}'
                                     OR
-                                    committee_id = 4
+                                    committee_id = '{$auth->config->ga6_id}'
                                     )
                                     GROUP BY 
                                     country_id
@@ -67,12 +67,12 @@ try{
                                     <div class="form-group row">
 
                                         <label for="" class="col-sm-2 col-form-label"><strong>
-                                                <div class=" <?=$countryData["flag"] != "" ? "flag flag-".strtolower($countryData["flag"]) :"" ?>" style="vertical-align: middle"></div><?=$countryData["country_name"]?></span>
+                                                <div class=" <?=$countryData["flag"] != "" ? "flag flag-".strtolower($countryData["flag"]) :"" ?>" style="vertical-align: middle"></div> <?=$countryData["country_name"]?></span>
 
                                                 <span class="text-danger">*</span></strong></label>
 
                                         <div class="col-sm-4">
-                                            <select class="form-control" name="user_name[]" required>
+                                            <select class="form-control" name="user_id[]" required>
                                                 <option value="">Please Select...</option>
                                                 <?php
                                                 $ambs = $PDO->query("
@@ -87,6 +87,16 @@ try{
                                                 school_id = {$userData["advisor_school"]}
                                                 AND 
                                                 country_id = {$countryData["country_id"]}
+                                                AND
+                                                 (
+                                                committee_id = '{$auth->config->ga1_id}'
+                                                OR
+                                                committee_id = '{$auth->config->ga3_id}'
+                                                OR
+                                                committee_id = '{$auth->config->ga4_id}'
+                                                OR
+                                                committee_id = '{$auth->config->ga6_id}'
+                                                )
                                                 ");
 
                                                 while($ambsData = $ambs->fetch(PDO::FETCH_ASSOC)){

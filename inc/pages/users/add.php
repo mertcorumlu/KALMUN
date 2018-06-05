@@ -112,7 +112,7 @@ try{
 
                                     <div class="col-sm-4">
                                         <input type="password" id="password" class="form-control" name="user_password" style="text-transform: ">
-                                        <small>If You Don't Set A Password,Users Password Will Automatically Sent</small>
+                                        <small>If You Don't Set A Password,Users Password Will Be Automatically Created and Emailed</small>
 
                                     </div>
 

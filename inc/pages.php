@@ -34,8 +34,8 @@ switch(get("page")){
     case "applications":
         $title = "Applications";
         $include_page = "applications";
-        $head = "<link rel=\"stylesheet\" href=\"/inc/css/popup.css\"/>";
-        $footer = "<script src=\"/inc/js/popup.js\"></script>\n<script src=\"/inc/js/applications.js\"></script>";
+        $head = "<link rel=\"stylesheet\" href=\"/inc/css/jquery.fancybox.min.css\">";
+        $footer = "<script src=\"/inc/js/popup.js\"></script><script src=\"/inc/js/jquery.fancybox.min.js\"></script>\n<script src=\"/inc/js/applications.js\"></script>";
         $auth_levels = array(0,1);
         break;
 
@@ -43,8 +43,8 @@ switch(get("page")){
         $title = "Users";
         $include_page = "users";
         $head = "<style>input[type=text]{text-transform: capitalize}</style>
-                 <link rel='stylesheet' href='/inc/css/popup.css'>";
-        $footer = "<script src=\"/inc/js/popup.js\"></script>";
+                 <link rel=\"stylesheet\" href=\"/inc/css/jquery.fancybox.min.css\">";
+        $footer = "<script src=\"/inc/js/popup.js\"></script><script src=\"/inc/js/jquery.fancybox.min.js\"></script>";
         $auth_levels = array(0,1);
         break;
 
@@ -52,8 +52,8 @@ switch(get("page")){
         $title = "Schools";
         $include_page = "school";
         $head = "<style>input[type=text]{text-transform: capitalize}</style>
-                 <link rel='stylesheet' href='/inc/css/popup.css'>";
-        $footer = "<script src=\"/inc/js/popup.js\"></script>";
+                 <link rel=\"stylesheet\" href=\"/inc/css/jquery.fancybox.min.css\">";
+        $footer = "<script src=\"/inc/js/popup.js\"></script><script src=\"/inc/js/jquery.fancybox.min.js\"></script>";
         $auth_levels = array(0,1);
         break;
 
@@ -61,8 +61,8 @@ switch(get("page")){
         $title = "Committees";
         $include_page = "committee";
         $head = "<style>input[type=text]{text-transform: capitalize}</style>
-                 <link rel='stylesheet' href='/inc/css/popup.css'>";
-        $footer = "<script src=\"/inc/js/popup.js\"></script>";
+                 <link rel=\"stylesheet\" href=\"/inc/css/jquery.fancybox.min.css\">";
+        $footer = "<script src=\"/inc/js/popup.js\"></script><script src=\"/inc/js/jquery.fancybox.min.js\"></script>";
         $auth_levels = array(0,1);
         break;
 
@@ -70,8 +70,17 @@ switch(get("page")){
         $title = "Countries";
         $include_page = "country";
         $head = "<style>input[type=text]{text-transform: capitalize}</style>
-                 <link rel='stylesheet' href='/inc/css/popup.css'>";
-        $footer = "<script src=\"/inc/js/popup.js\"></script>";
+                 <link rel=\"stylesheet\" href=\"/inc/css/jquery.fancybox.min.css\">";
+        $footer = "<script src=\"/inc/js/popup.js\"></script><script src=\"/inc/js/jquery.fancybox.min.js\"></script>";
+        $auth_levels = array(0,1);
+        break;
+
+    case "sessions":
+        $title = "Sessions";
+        $include_page = "sessions";
+        $head = "<style>input[type=text]{text-transform: capitalize}</style>
+                 <link rel=\"stylesheet\" href=\"/inc/css/jquery.fancybox.min.css\">";
+        $footer = "<script src=\"/inc/js/popup.js\"></script><script src=\"/inc/js/jquery.fancybox.min.js\"></script>";
         $auth_levels = array(0,1);
         break;
 
@@ -80,17 +89,30 @@ switch(get("page")){
         $title = "Students";
         $include_page = "student";
         $head = "<style>input[type=text]{text-transform: capitalize}</style>
-                 <link rel='stylesheet' href='/inc/css/popup.css'>";
-        $footer = "<script src=\"/inc/js/popup.js\"></script>";
+                 <link rel=\"stylesheet\" href=\"/inc/css/jquery.fancybox.min.css\">";
+        $footer = "<script src=\"/inc/js/popup.js\"></script><script src=\"/inc/js/jquery.fancybox.min.js\"></script>";
         $auth_levels = array(3);
+        break;
+
+    case "files":
+        $title = "Files";
+        $include_page = "files";
+        $head = "<style>input[type=text]{text-transform: capitalize}</style>
+                 <link rel=\"stylesheet\" href=\"/inc/css/jquery.fancybox.min.css\">";
+        $footer = "<script src=\"/inc/js/popup.js\"></script>
+<script src=\"/inc/js/jquery.fancybox.min.js\"></script>
+<script src=\"/inc/js/file.js\"></script>
+<script src=\"/inc/js/jquery.form.min.js\"></script>
+                    ";
+        $auth_levels = array(0,1,2);
         break;
 
     case "profile":
         $title = "Profile";
         $include_page = "profile";
         $head = "<style>input[type=text]{text-transform: capitalize}</style>
-                 <link rel='stylesheet' href='/inc/css/popup.css'>";
-        $footer = "<script src=\"/inc/js/popup.js\"></script>";
+                 <link rel=\"stylesheet\" href=\"/inc/css/jquery.fancybox.min.css\">";
+        $footer = "<script src=\"/inc/js/popup.js\"></script><script src=\"/inc/js/jquery.fancybox.min.js\"></script><script src=\"/inc/js/jquery.fancybox.min.js\"></script>";
         $auth_levels = array(0,1,2,3,4);
         break;
 

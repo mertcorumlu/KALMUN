@@ -91,7 +91,7 @@ try{
 
     $return = array(
         "error" => false,
-        "message" => "User Succesfully Edited. Mail Sent."
+        "message" => "Profile Sucessfully Updated."
     );
     return_error($return);
 

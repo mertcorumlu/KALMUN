@@ -3,3 +3,5 @@ RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([a-zA-Z0-9\-]*)\/?([a-zA-Z0-9\-]*)?$ ?page=$1&subpage=$2 [NC,L]
+RewriteRule ^get_file$ inc/ajax/get_file [NC,L]
+

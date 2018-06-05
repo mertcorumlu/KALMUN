@@ -29,7 +29,7 @@
     });
 </script>
 <div class="peers ai-s fxw-nw h-100vh">
-    <div class="d-n@sm- peer peer-greed h-100 pos-r bgr-n bgpX-c bgpY-c bgsz-cv" style='background-image: url("/inc/img/1488560405img__0.jpg")'>
+    <div class="d-n@sm- peer peer-greed h-100 pos-r bgr-n bgpX-c bgpY-c bgsz-cv" style='background-image: url("/inc/img/united-nations-know-about-cbd-1280x800.jpg")'>
         <div class="pos-a centerXY">
             <div class="bgc-white bdrs-50p pos-r" style='width: 300px; height: 300px;'>
                 <img class="pos-a centerXY" src="/inc/img/mun_panel_logo.png" style='width: 230px; height: 230px;' alt="MUN LOGO">

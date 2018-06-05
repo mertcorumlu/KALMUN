@@ -12,6 +12,15 @@ $db_name = "kalmun";
 $db_user = "root";
 $db_password = "";
 
+//ACCEPTED FILE TYPES
+$file_types = array(
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'application/pdf'
+);
+//FILES DIRETORY
+define("files_directory",$_SERVER["DOCUMENT_ROOT"]."/inc/files");
+
 //AUTH STATUES
 $Auth_Statues = array(
     "0" => "Super Admin",
@@ -36,6 +45,23 @@ $Application_Status_Button = array(
     2 => "<div data-id=\"%s\" class=\"btn btn-danger c-white\" >{$Application_Status[2]}</div>"
 );
 
+$file_status = array(
+    0 => "Pending For Moderator",/*FOR MODEERATOR*/
+    1=> "Pending For Chair",/*FOR CHAIR*/
+    2 => "Approved",
+    3 => "Rejected",
+    4 => "Approved & Printed",
+    5 => "Passed"
+);
+
+$file_status_button = array(
+    0 => "<div data-id=\"%s\" class=\"btn btn-warning c-white\" >{$file_status[0]}</div>",
+    1 => "<div data-id=\"%s\" class=\"btn btn-warning c-white\" >{$file_status[1]}</div>",
+    2 => "<div data-id=\"%s\" class=\"btn btn-success c-white\" >{$file_status[2]}</div>",
+    3 => "<div data-id=\"%s\" class=\"btn btn-danger c-white\" >{$file_status[3]}</div>",
+    4 => "<div data-id=\"%s\" class=\"btn btn-success c-white\" >{$file_status[4]}</div>",
+    5 => "<div data-id=\"%s\" class=\"btn btn-info c-white\" >{$file_status[5]}</div>",
+);
 
 //TYPE 1 = School Registration
 //TYPE 2 = Individual Registration
@@ -91,13 +117,14 @@ Unfourtunately we have rejected your submission.<br>
 );
 
 //ADD USER MAILS
-$addeditSubject = "KALMUN Panel Account";
+$addeditSubject = "K@LMUN Panel Account";
 $addEditUserMail = "
 Dear Participant,<br><br>
 Your control panel account is :<br>
 E-mail : <strong>%s</strong><br>
 Password : <strong>%s</strong><br><br>
-<p>You can change your password from system anytime.</p>
+<p>You can login via <a href='https://panel.kalmun.org/' target='_blank'>https://panel.kalmun.org/</a> .<br>
+You can change your password from system anytime.</p>
 ";
 
 $addEditUserMailAdvisor = "
@@ -107,8 +134,9 @@ You may start enrolling your delegates to the K@LMUN system. The information you
 <br><br>
 Your email: <strong>%s</strong><br>
 Your password: <strong>%s</strong>
+You can login via <a href='https://panel.kalmun.org/' target='_blank'>https://panel.kalmun.org/</a> .<br>
 <br><br>
-<p>Please complete this form in 10 days latest. We wish you the best at your work. </p>
+<p>Please complete this form in 5 days latest. We wish you the best at your work. </p>
 Cordially,<br> 
 KALMUN Secretariat
 ";

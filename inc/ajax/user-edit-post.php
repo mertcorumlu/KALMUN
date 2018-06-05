@@ -69,7 +69,7 @@ try{
 
         $updateArray["committee_id"] = post("user_committee_id");
 
-    }else if(post("user_statue") == ("0"||"1") ){
+    }else if( ( post("user_statue") == "0"|| post("user_statue") == "1") ){
 
         if(auth_level != "0"){
             $return = array(

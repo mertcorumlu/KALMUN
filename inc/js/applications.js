@@ -59,3 +59,4 @@
         a.html(a.data("original-text"));
         a.attr("disabled", false);
     }
+

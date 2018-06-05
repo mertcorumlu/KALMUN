@@ -10,7 +10,33 @@ function logout(){
 
 }
 
-$("button.delete-button").on("click",function () {
+function file_printed(id){
+
+    if(confirm("Are you sure marking this file as printed?")){
+        $.ajax({
+            url : "/inc/ajax/file-evaluate-post",
+            type : "POST",
+            data : {"type":"file_evaluate","unique_id": id,"file_status":"4"},
+            error:function () {
+                alert("An Error Occured");
+            },
+            success:function (data) {
+
+                if(data.error === true){
+                    alert(data.message);
+                }else{
+                   location.reload();
+                }
+
+            }
+        });
+    }
+
+
+
+}
+
+$(document).on("click","button.delete-button",function () {
 
    if( $(this).data("id") !== "" && $(this).data("type") !== ""){
 

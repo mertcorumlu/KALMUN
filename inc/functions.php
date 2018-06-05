@@ -187,3 +187,41 @@ function random_string($a){
 
     return $return_string;
 }
+
+function percentage($pay,$payda){
+
+    return sprintf( "%01.2f",($pay / $payda)*100);
+
+}
+
+function sanitizeFileName($dangerousFilename, $platform = 'Linux')
+{
+    if (in_array(strtolower($platform), array('unix', 'linux'))) {
+        // our list of "dangerous characters", add/remove
+        // characters if necessary
+        $dangerousCharacters = array(" ", '"', "'", "&", "/", "\\", "?", "#");
+    } else {
+        // no OS matched? return the original filename then...
+        return $dangerousFilename;
+    }
+
+    // every forbidden character is replace by an underscore
+    return tr_converter(str_replace($dangerousCharacters, '_', $dangerousFilename));
+}
+
+function tr_converter($uri) {
+    $uri = str_replace ("ç","c",$uri);
+    $uri = str_replace ("ğ","g",$uri);
+    $uri = str_replace ("İ","I",$uri);
+    $uri = str_replace ("ı","i",$uri);
+    $uri = str_replace ("ş","s",$uri);
+    $uri = str_replace ("ö","o",$uri);
+    $uri = str_replace ("ü","u",$uri);
+    $uri = str_replace ("Ü","U",$uri);
+    $uri = str_replace ("Ç","c",$uri);
+    $uri = str_replace ("Ğ","g",$uri);
+    $uri = str_replace ("Ş","S",$uri);
+    $uri = str_replace ("Ö","O",$uri);
+    $uri = str_replace ("ç","c",$uri);
+    return $uri;
+}

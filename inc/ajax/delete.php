@@ -8,7 +8,7 @@
 
 include '../loader.php';
 
-if(empty( get("type") || get("id") )){
+if(empty( get("type"))  || empty(get("id") )){
 
     http_response_code(400);
     exit;
@@ -49,6 +49,18 @@ try{
         case "user";
             $query = "DELETE FROM `phpauth_users` WHERE `id` ='{$_GET["id"]}'";
         break;
+
+        case "file";
+            $query = "DELETE FROM `files` WHERE `unq_id` ='{$_GET["id"]}'";
+            break;
+
+        case "file-version";
+        $query = "DELETE FROM `files` WHERE `id` ='{$_GET["id"]}'";
+        break;
+
+        case "session";
+            $query = "DELETE FROM `sessions` WHERE `id` ='{$_GET["id"]}'";
+            break;
 
     }
 

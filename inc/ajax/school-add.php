@@ -58,7 +58,7 @@ try{
 
     }
 
-    //    $PDO->query("UPDATE `phpauth_users` SET `isactive` = 1,`country_id` = '".post("school_country_id")."',`school_id` = {$school_id} WHERE `id` = '{$_POST["advisor_id"]}' ");
+    $PDO->query("UPDATE `phpauth_users` SET `isactive` = 1 WHERE `id` = '{$_POST["advisor_id"]}' ");
 
     $return = array(
         "error" => false,

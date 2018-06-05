@@ -6,5 +6,9 @@
  * Time: 17:20
  */
 
-print_r($_POST);
+
+
+
+echo sanitizeFileName("as asldsa asknç ş ü ii qado .docx","linux");
+?>
 
