@@ -17,7 +17,7 @@ if( empty($_GET["unique_id"]) ){
 }
 
 //CHECK IF USER LOGGED IN,OR IS AUTHORIZED
-check_login($PDO,$auth,array(0,1,2));
+check_login($PDO,$auth,array(0,1,2,4));
 
 $return = array(
     "error" => true,
@@ -76,7 +76,7 @@ try {
                     <small>File Unique ID : <?=$_GET["unique_id"]?></small>
                     <br>
                     <br>
-                    <table class="table table-file-versions">
+                    <table class="table table-file-versions table-striped table-bordered">
                         <thead>
                         <tr>
                             <th>ID</th>

@@ -23,11 +23,15 @@ switch(get("page")){
 
     case "":
         $include_page = "home";
+        $head = "<link rel=\"stylesheet\" href=\"/inc/css/jquery.fancybox.min.css\">";
+        $footer = "<script src=\"/inc/js/popup.js\"></script><script src=\"/inc/js/jquery.fancybox.min.js\"></script>";
         $auth_levels = array(0,1,2,3,4);
         break;
 
     case "home":
         $include_page = "home";
+        $head = "<link rel=\"stylesheet\" href=\"/inc/css/jquery.fancybox.min.css\">";
+        $footer = "<script src=\"/inc/js/popup.js\"></script><script src=\"/inc/js/jquery.fancybox.min.js\"></script>";
         $auth_levels = array(0,1,2,3,4);
         break;
 
@@ -107,12 +111,21 @@ switch(get("page")){
         $auth_levels = array(0,1,2);
         break;
 
+    case "roll-calls":
+        $title = "Roll Calls";
+        $include_page = "roll-calls";
+        $head = "<style>input[type=text]{text-transform: capitalize}</style>
+                 <link rel=\"stylesheet\" href=\"/inc/css/jquery.fancybox.min.css\">";
+        $footer = "<script src=\"/inc/js/popup.js\"></script><script src=\"/inc/js/jquery.fancybox.min.js\"></script>";
+        $auth_levels = array(0,1,2);
+        break;
+
     case "profile":
         $title = "Profile";
         $include_page = "profile";
         $head = "<style>input[type=text]{text-transform: capitalize}</style>
                  <link rel=\"stylesheet\" href=\"/inc/css/jquery.fancybox.min.css\">";
-        $footer = "<script src=\"/inc/js/popup.js\"></script><script src=\"/inc/js/jquery.fancybox.min.js\"></script><script src=\"/inc/js/jquery.fancybox.min.js\"></script>";
+        $footer = "<script src=\"/inc/js/popup.js\"></script><script src=\"/inc/js/jquery.fancybox.min.js\"></script>";
         $auth_levels = array(0,1,2,3,4);
         break;
 

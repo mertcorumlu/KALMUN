@@ -57,14 +57,14 @@ try{
                             <tr>
                                 <th>ID</th>
                                 <th>Active</th>
-                                <th>Full Name</th>
+                                <th data-priority="1">Full Name</th>
                                 <th>School</th>
                                 <th>Statue</th>
                                 <th>E-mail</th>
                                 <th>Telephone</th>
                                 <th>Representing Country</th>
                                 <th>Committee</th>
-                                <th>Action</th>
+                                <th data-priority="2">Action</th>
                                 <th></th>
 
                             </tr>
@@ -81,6 +81,7 @@ try{
                                  */
                                 $applications = $PDO->query("SELECT
                                                                       phpauth_users.id,
+                                                                      phpauth_users.is_amb,
                                                                       CONCAT(
                                                                         phpauth_users.name,
                                                                         ' ',
@@ -154,6 +155,8 @@ try{
 
 
                                             }
+                                            echo ($data["is_amb"] == "1" ? "<i class=\"fa fa-star text-warning ambassador\" data-toggle=\"tooltip\" title=\"Ambassador\" ></i>" : "");
+
                                             ?>
                                             </strong>
                                         </td>

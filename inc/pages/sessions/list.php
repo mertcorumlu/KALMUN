@@ -61,8 +61,8 @@
                                     <tr>
                                         <td><strong><?=$data["id"]?></strong></td>
                                         <td><?=$data["session_name"]?></td>
-                                        <td><?=date('d/m/Y h:i ',strtotime($data["session_start"]))?></td>
-                                        <td><?=date('d/m/Y h:i ',strtotime($data["session_end"]))?></td>
+                                        <td><?=date('d/m/Y H:i ',strtotime($data["session_start"]))?></td>
+                                        <td><?=date('d/m/Y H:i ',strtotime($data["session_end"]))?></td>
 
 
 
@@ -70,6 +70,7 @@
 
                                         <td>
                                             <button type="button" class="btn btn-primary" onclick="open_popup('/inc/ajax/session-edit?id=<?=$data["id"]?>')">Edit</button>
+                                            <button type="button" class="btn btn-primary" onclick="open_popup('/inc/ajax/view-roll-calls?id=<?=$data["id"]?>')">Roll Calls</button>
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-danger delete-button" data-type="session" data-id="<?=$data["id"]?>" >Delete</button>

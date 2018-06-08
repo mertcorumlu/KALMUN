@@ -9,6 +9,8 @@
 //LOAD APP
 include "loader.php";
 
+date_default_timezone_set("Europe/Istanbul");
+
 try{
 
     //CONTROL IF ADVISOR HAS CREATED ANY USER

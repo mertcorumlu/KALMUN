@@ -72,6 +72,9 @@
                                 <a class="sidebar-link" href="/users/list">List Users</a>
                             </li>
                             <li>
+                                <a class="sidebar-link" href="/users/ambassadors">List Ambassadors</a>
+                            </li>
+                            <li>
                                 <a class="sidebar-link" href="/users/add">Add New User</a>
                             </li>
 
@@ -234,6 +237,15 @@
                         </ul>
                     </a>
 
+                </li>
+
+                <li class="nav-item">
+                    <a class="sidebar-link" href="/roll-calls">
+                <span class="icon-holder">
+                  <i class="c-blue-500 fa fa-calendar-check-o"></i>
+                </span>
+                        <span class="title">Roll Calls</span>
+                    </a>
                 </li>
 
                 <?php
